@@ -4,6 +4,7 @@ import lib.fastboard.FastManager;
 import lib.ziggurat.TabAdapter;
 import lib.ziggurat.tab.Ziggurat;
 import net.kappa.boxpvp.commands.admin.GamemodeCommand;
+import net.kappa.boxpvp.commands.admin.MineCommand;
 import net.kappa.boxpvp.commands.others.MsgCommand;
 import net.kappa.boxpvp.commands.social.DiscordCommand;
 import net.kappa.boxpvp.commands.social.StoreCommand;
@@ -34,7 +35,7 @@ public class Main extends JavaPlugin {
     public static File file;
     //Providers
     private ManagerProvider managerProvider;
-    private TaskProvider taskProvider;
+    public TaskProvider taskProvider;
     //Impl
     private Ziggurat tab;
     private FastManager scoreboard;
@@ -44,7 +45,6 @@ public class Main extends JavaPlugin {
         // Plugin startup logic
         final String a = getServer().getClass().getPackage().getName();
         final String version = a.substring(a.lastIndexOf('.') + 1);
-        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
         pseudoProtocol = Integer.parseInt(version.split("_")[1]);
         plugin = this;
@@ -52,8 +52,8 @@ public class Main extends JavaPlugin {
         pluginManager = this.getServer().getPluginManager();
         file = this.getDataFolder();
 
-        if (pluginManager.isPluginEnabled("ProtocolLib"))
-            StatusUtil.setProtocol(true);
+        if (pluginManager.isPluginEnabled("PlaceholderAPI"))
+            StatusUtil.setPlaceholder(true);
 
         this.setupManagers();
         this.setupFiles();
@@ -103,6 +103,7 @@ public class Main extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("teamspeak")).setExecutor(new TeamSpeakCommand());
         Objects.requireNonNull(this.getCommand("twitter")).setExecutor(new TwitterCommand());
         // - Player Admin Commands
+        Objects.requireNonNull(this.getCommand("mine")).setExecutor(new MineCommand());
         Objects.requireNonNull(this.getCommand("gamemode")).setExecutor(new GamemodeCommand());
     }
 

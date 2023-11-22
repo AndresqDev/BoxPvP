@@ -18,10 +18,14 @@ lib\fastboard\FastReflection$PacketConstructor.class
 lib\fastboard\thread\FastThread.class
 lib\ziggurat\tab\utils\impl\ProtocolLibTabImpl.class
 net\kappa\boxpvp\commands\social\TeamSpeakCommand.class
+net\kappa\boxpvp\commands\admin\MineCommand.class
 lib\fastboard\FastAnim.class
+net\kappa\boxpvp\utils\objects\MineObject.class
+net\kappa\boxpvp\tasks\list\MineRegenTask.class
 lib\ziggurat\tab\ZigguratListener.class
 net\kappa\boxpvp\utils\EntryUtil.class
 lib\fastboard\FastBoard$ScoreboardAction.class
+net\kappa\boxpvp\listeners\list\player\PlayerInteractListener.class
 net\kappa\boxpvp\files\list\decoration\ScoreboardFile.class
 net\kappa\boxpvp\listeners\ListenerProvider.class
 lib\ziggurat\tab\ZigguratCommons.class
@@ -31,9 +35,9 @@ lib\ziggurat\tab\utils\SkinTexture.class
 net\kappa\boxpvp\managers\list\DataManager.class
 lib\ziggurat\tab\utils\TabColumn.class
 lib\ziggurat\utils\playerversion\IPlayerVersion.class
+net\kappa\boxpvp\tasks\list\ClearLagTask.class
 lib\ziggurat\utils\MathsUtility.class
 lib\ziggurat\tab\utils\IZigguratHelper.class
-net\kappa\boxpvp\utils\BungeeUtil.class
 lib\ziggurat\tab\utils\LegacyClientUtils.class
 lib\fastboard\FastReflection.class
 lib\ziggurat\tab\Ziggurat.class
@@ -42,9 +46,9 @@ net\kappa\boxpvp\tasks\TaskProvider.class
 net\kappa\boxpvp\utils\presets\PatternsPreset.class
 lib\ziggurat\utils\playerversion\PlayerVersion.class
 lib\ziggurat\tab\ZigguratAdapter.class
+net\kappa\boxpvp\utils\Cuboid.class
 net\kappa\boxpvp\files\list\decoration\TabFile.class
 lib\fastboard\FastManager.class
-net\kappa\boxpvp\tasks\list\TimeTask.class
 net\kappa\boxpvp\managers\ManagerProvider$1.class
 net\kappa\boxpvp\commands\admin\GamemodeCommand.class
 lib\fastboard\FastBoard$TeamMode.class
@@ -63,6 +67,7 @@ net\kappa\boxpvp\commands\social\DiscordCommand.class
 lib\ziggurat\tab\utils\TabEntry.class
 lib\ziggurat\tab\utils\impl\ProtocolLibTabImpl$1.class
 lib\ziggurat\tab\ZigguratThread.class
+net\kappa\boxpvp\utils\Cuboid$CuboidIterator.class
 lib\ziggurat\utils\PlayerUtility.class
 lib\ziggurat\utils\playerversion\impl\PlayerVersionProtocolLibImpl.class
 net\kappa\boxpvp\listeners\list\system\WorldInteractionsListener.class
@@ -72,6 +77,9 @@ net\kappa\boxpvp\commands\others\MsgCommand.class
 net\kappa\boxpvp\utils\StatusUtil.class
 net\kappa\boxpvp\tasks\list\TimedMessageTask.class
 lib\fastboard\FastListener.class
+net\kappa\boxpvp\managers\list\MineManager.class
+net\kappa\boxpvp\utils\Cuboid$CuboidDirection.class
+net\kappa\boxpvp\utils\Cuboid$1.class
 lib\ziggurat\tab\utils\BufferedTabObject.class
 lib\ziggurat\utils\UtilityManager.class
 net\kappa\boxpvp\commands\social\TwitterCommand.class

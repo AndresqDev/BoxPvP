@@ -14,7 +14,7 @@ public class GamemodeCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "No console.");
             return false;
-        } else if (!sender.hasPermission("hub.gamemode")) {
+        } else if (!sender.hasPermission("core.gamemode")) {
             sender.sendMessage(ChatColor.RED + "No permission.");
             return false;
         } else if (args.length < 1) {

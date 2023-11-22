@@ -36,13 +36,13 @@ public class PlaceholderUtil {
     }
 
     private static String applyExternals(Player player, String str) {
-        if (StatusUtil.getProtocol()) return str;
+        if (StatusUtil.getPlaceholder()) return str;
 
         return PlaceholderAPI.setPlaceholders(player, str);
     }
 
     private static List<String> applyExternals(Player player, List<String> strs) {
-        if (StatusUtil.getProtocol()) return strs;
+        if (StatusUtil.getPlaceholder()) return strs;
 
         return PlaceholderAPI.setPlaceholders(player, strs);
     }

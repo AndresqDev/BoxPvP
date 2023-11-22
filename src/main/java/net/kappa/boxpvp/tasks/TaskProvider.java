@@ -1,8 +1,10 @@
 package net.kappa.boxpvp.tasks;
 
 import net.kappa.boxpvp.files.list.OptionsFile;
+import net.kappa.boxpvp.files.list.system.DataFile;
 import net.kappa.boxpvp.tasks.list.ActionBarTask;
 import net.kappa.boxpvp.tasks.list.ClearLagTask;
+import net.kappa.boxpvp.tasks.list.MineRegenTask;
 import net.kappa.boxpvp.tasks.list.TimedMessageTask;
 
 import java.util.ArrayList;
@@ -23,6 +25,14 @@ public class TaskProvider {
         lagTask.runTaskTimerAsynchronously(plugin, OptionsFile.others_clearlag_delay, OptionsFile.others_clearlag_delay);
         this.tasks.add(lagTask.getTaskId());
 
+        if (!DataFile.mines.isEmpty()) {
+            DataFile.mines.forEach(m -> {
+                final MineRegenTask regenTask = new MineRegenTask(m);
+                regenTask.runTaskTimer(plugin, 20L, m.getTime());
+                this.tasks.add(regenTask.getTaskId());
+            });
+        }
+
         OptionsFile.message_timed_objects.forEach(msg -> {
             final TimedMessageTask timedMessageTask = new TimedMessageTask(msg.getMessages());
             timedMessageTask.runTaskTimerAsynchronously(plugin, 5L, msg.getTime());
@@ -34,7 +44,11 @@ public class TaskProvider {
         this.tasks.add(actionBarTask.getTaskId());
     }
 
+    public void addTask(Integer ID) {
+        this.tasks.add(ID);
+    }
+
     public void disable() {
-        tasks.forEach(i -> scheduler.cancelTask(i));
+        this.tasks.forEach(i -> scheduler.cancelTask(i));
     }
 }

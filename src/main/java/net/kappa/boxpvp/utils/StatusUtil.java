@@ -1,13 +1,13 @@
 package net.kappa.boxpvp.utils;
 
 public class StatusUtil {
-    private static boolean protocolLib = false;
+    private static boolean placeholderAPI = false;
 
-    public static boolean getProtocol() {
-        return !protocolLib;
+    public static boolean getPlaceholder() {
+        return !placeholderAPI;
     }
 
-    public static void setProtocol(boolean status) {
-        protocolLib = status;
+    public static void setPlaceholder(boolean status) {
+        placeholderAPI = status;
     }
 }

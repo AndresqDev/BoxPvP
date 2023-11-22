@@ -8,6 +8,8 @@ depends:
   - ProtocolLib
 
 commands:
+  mine:
+    aliases: [ minecreate ]
   message:
     aliases: [ msg, reply, r ]
   gamemode:

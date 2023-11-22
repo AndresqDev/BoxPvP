@@ -9,6 +9,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class ActionBarTask extends BukkitRunnable {
     @Override
     public void run() {
-        Bukkit.getOnlinePlayers().forEach(p -> ActionBar.sendActionBar(p, PlaceholderUtil.setPlaceholders(p, OptionsFile.others_actionbar_placeholder)));
+        //Bukkit.getOnlinePlayers().forEach(p -> ActionBar.sendActionBar(p, PlaceholderUtil.setPlaceholders(p, OptionsFile.others_actionbar_placeholder)));
     }
 }

@@ -16,6 +16,8 @@ options:
     - '/plugins'
     - '/server'
 
+  clearlag_delay: 18000 # - Time in ticks
+
   social_links:
     store: '&b[Store]&7: &fstore.server.net'
     discord: '&b[Discord]&7: &fdiscord.gg/server'
