@@ -1,0 +1,50 @@
+#Placeholders: %rank% %rank_expire% %player% %player_kills% %player_live%, %date% %online_players%
+#Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
+
+scoreboard:
+  options:
+    # | - Strings
+    bars: '<hex:00FFFF>&m-----------------'
+    title: '<hex:FF55FF>&lSERVER'
+    footer: ' <gradient:FF55FF>IP: play.server.net<!gradient:00FFFF> '
+    # | - Booleans
+    invisible_bars: true
+    footer_enabled: true
+
+    animated_title: false
+    animated_footer: false
+    # - Ints
+    board_update_rate: 1000 #Update rate format: miliseconds
+
+  animated:
+    # - Update rate format: Ticks
+    title_update_rate: 4
+    footer_update_rate: 60
+    # - Animations
+    title:
+      - '<gradient:2C08BA>Server<!gradient:028A97>'
+      - '<gradient:2C08BA>Serve<!gradient:028A97>'
+      - '<gradient:2C08BA>Serv<!gradient:028A97>'
+      - '<gradient:2C08BA>Ser<!gradient:028A97>'
+      - '<gradient:2C08BA>Se<!gradient:028A97>'
+      - '<gradient:2C08BA>S<!gradient:028A97>'
+      - ''
+      - '_'
+      - ' '
+      - '_'
+      - ' '
+      - '_'
+      - ' '
+      - '_'
+    footer:
+      - '    <gradient:2C08BA>server.net<!gradient:028A97>'
+      - '   <gradient:2C08BA>ts.server.org<!gradient:028A97>'
+
+  # - Lines
+  lines:
+    - ' <hex:00FFFF>▎ <hex:FF55FF>Nick: &f%player%'
+    - ' <hex:00FFFF>▎ <hex:FF55FF>Rank: &4%rank%'
+    - ''
+    - ' <hex:00FFFF>▎ <hex:FF55FF>Coins: &f'
+    - ''
+    - ' <hex:00FFFF>▎ <hex:FF55FF>Online: &f%online_players%/2000'

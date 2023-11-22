@@ -1,0 +1,57 @@
+#Placeholders: %rank% %rank_expire% %player% %player_kills% %player_live% %date% %online_players%
+#Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
+
+options:
+  chat_format: '&7[%rank%&7] &a%player%&7: &f'
+  actionbar: '<hex:2C08BA> < <gradient:2C08BA>Welcome,<!gradient:2C08BA><hex:2C08BA> %player% >'
+  # actionbar: '' = Disabled
+
+  blocked_word_msg: '&cSorry!, Please check your message.'
+  blocked_words:
+    - 'nigger'
+    - 'retard'
+
+  blocked_commands_msg: '&cSorry!, Command blocked.'
+  blocked_commands:
+    - '/plugins'
+    - '/server'
+
+  social_links:
+    store: '&b[Store]&7: &fstore.server.net'
+    discord: '&b[Discord]&7: &fdiscord.gg/server'
+    twitter: '&b[Twitter]&7: &ftwitter.com/@User'
+    ts: '&b[TeamSpeak]&7: &fts.server.net'
+
+  automatic_messages:
+    discord_alert:
+      message:
+        - "&aPlease join to discord!"
+        - "&7- &bdiscord.gg/server"
+      time: 300 # - Time in ticks
+
+  default_join_message:
+    - '&7&m----------------------'
+    - '   <hex:2C08BA>Welcome to the server!'
+    - '&7&m----------------------'
+
+  global_join_message: # - Sended to all players online
+    my_rank_one:
+      permission: 'rank.one.join'
+      message: '%rank% &b%player% &ehas been joined!'
+    my_rank_two:
+      permission: 'rank.two.join'
+      message: '%rank% &b%player% &ehas been joined to battle royale!'
+
+  private_messages:
+    send_format: '&7(To %target%): &f'
+    receive_format: '&7(From %target%): &f'
+
+  world: # - Creative mode = Bypasses all block checks
+    block_break: false
+    block_place: false
+    weather_changes: false
+    hunger_loss: false
+    mob_spawn: false
+    entity_damage: true
+    item_drop: true
+    item_pickup: true

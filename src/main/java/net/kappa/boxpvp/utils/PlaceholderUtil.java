@@ -1,0 +1,49 @@
+package net.kappa.boxpvp.utils;
+
+import me.clip.placeholderapi.PlaceholderAPI;
+import net.kappa.boxpvp.managers.list.RankManager;
+import org.bukkit.Bukkit;
+import org.bukkit.Statistic;
+import org.bukkit.entity.Player;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class PlaceholderUtil {
+    public static String setPlaceholders(Player player, String str) {
+        return applyExternals(player, str.replace("%player%", player.getName())
+                .replace("%displayname%", player.getDisplayName())
+                .replace("%player_live%", String.valueOf(player.getHealthScale()))
+                .replace("%player_kills%", String.valueOf(player.getStatistic(Statistic.PLAYER_KILLS)))
+                .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
+                .replace("%rank%", ColorUtil.translate(RankManager.getPrefixOf(player.getUniqueId())).replace("[", "").replace("]", ""))
+                .replace("%rank_expire%", RankManager.getExpireOf(player.getUniqueId()))
+                .replace("%date%", LocalDate.now().toString()));
+    }
+
+    public static List<String> setPlaceholders(Player player, List<String> strs) {
+        return applyExternals(player, strs.stream()
+                .map(str -> str.replace("%player%", player.getName())
+                        .replace("%displayname%", player.getDisplayName())
+                        .replace("%player_live%", String.valueOf(player.getHealthScale()))
+                        .replace("%player_kills%", String.valueOf(player.getStatistic(Statistic.PLAYER_KILLS)))
+                        .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
+                        .replace("%rank%", ColorUtil.translate(RankManager.getPrefixOf(player.getUniqueId()))).replace("[", "").replace("]", "")
+                        .replace("%rank_expire%", RankManager.getExpireOf(player.getUniqueId()))
+                        .replace("%date%", LocalDate.now().toString().replace("-", ", ")))
+                .collect(Collectors.toList()));
+    }
+
+    private static String applyExternals(Player player, String str) {
+        if (StatusUtil.getProtocol()) return str;
+
+        return PlaceholderAPI.setPlaceholders(player, str);
+    }
+
+    private static List<String> applyExternals(Player player, List<String> strs) {
+        if (StatusUtil.getProtocol()) return strs;
+
+        return PlaceholderAPI.setPlaceholders(player, strs);
+    }
+}

@@ -1,0 +1,22 @@
+name: BoxPvP
+version: '${project.version}'
+author: Andresq, fran2019
+main: net.kappa.boxpvp.Main
+api-version: 1.16
+
+depends:
+  - ProtocolLib
+
+commands:
+  message:
+    aliases: [ msg, reply, r ]
+  gamemode:
+    aliases: [ gm ]
+  discord:
+    aliases: [ dc ]
+  store:
+    aliases: [ st ]
+  teamspeak:
+    aliases: [ ts ]
+  twitter:
+    aliases: [ tw ]
