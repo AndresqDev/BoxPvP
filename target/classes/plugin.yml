@@ -8,6 +8,10 @@ depends:
   - ProtocolLib
 
 commands:
+  claim:
+    aliases: [ claimcreate ]
+  claimremove:
+    aliases: [ claimrem ]
   mine:
     aliases: [ minecreate ]
   message:
