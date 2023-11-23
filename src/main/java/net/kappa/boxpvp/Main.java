@@ -1,8 +1,8 @@
 package net.kappa.boxpvp;
 
-import lib.fastboard.FastManager;
-import lib.ziggurat.TabAdapter;
-import lib.ziggurat.tab.Ziggurat;
+import depends.fastboard.FastManager;
+import depends.ziggurat.TabAdapter;
+import depends.ziggurat.tab.Ziggurat;
 import net.kappa.boxpvp.commands.admin.ClaimCommand;
 import net.kappa.boxpvp.commands.admin.GamemodeCommand;
 import net.kappa.boxpvp.commands.admin.MineCommand;

@@ -1,7 +1,7 @@
 package net.kappa.boxpvp.files.list.decoration;
 
-import lib.ziggurat.tab.utils.TabColumn;
-import lib.ziggurat.tab.utils.TabObject;
+import depends.ziggurat.tab.utils.TabColumn;
+import depends.ziggurat.tab.utils.TabObject;
 import net.kappa.boxpvp.utils.ColorUtil;
 import net.kappa.boxpvp.utils.EntryUtil;
 import org.bukkit.configuration.file.FileConfiguration;

@@ -17,8 +17,7 @@ public class PlaceholderUtil {
                 .replace("%player_live%", String.valueOf(player.getHealthScale()))
                 .replace("%player_kills%", String.valueOf(player.getStatistic(Statistic.PLAYER_KILLS)))
                 .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
-                .replace("%rank%", ColorUtil.translate(RankManager.getPrefixOf(player.getUniqueId())).replace("[", "").replace("]", ""))
-                .replace("%rank_expire%", RankManager.getExpireOf(player.getUniqueId()))
+                .replace("%rank%", ColorUtil.translate(RankManager.getImpl().getGroupPrefix(player)).replace("[", "").replace("]", ""))
                 .replace("%date%", LocalDate.now().toString()));
     }
 
@@ -29,8 +28,7 @@ public class PlaceholderUtil {
                         .replace("%player_live%", String.valueOf(player.getHealthScale()))
                         .replace("%player_kills%", String.valueOf(player.getStatistic(Statistic.PLAYER_KILLS)))
                         .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
-                        .replace("%rank%", ColorUtil.translate(RankManager.getPrefixOf(player.getUniqueId()))).replace("[", "").replace("]", "")
-                        .replace("%rank_expire%", RankManager.getExpireOf(player.getUniqueId()))
+                        .replace("%rank%", ColorUtil.translate(RankManager.getImpl().getGroupPrefix(player))).replace("[", "").replace("]", "")
                         .replace("%date%", LocalDate.now().toString().replace("-", ", ")))
                 .collect(Collectors.toList()));
     }

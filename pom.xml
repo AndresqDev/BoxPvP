@@ -66,6 +66,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -76,13 +80,6 @@
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/Spigots/spigot-1.16.jar</systemPath>
-        </dependency>
-        <!--XSeries Jar-->
-        <dependency>
-            <groupId>com.github.cryptomorin</groupId>
-            <artifactId>XSeries</artifactId>
-            <version>9.3.1</version>
-            <scope>provided</scope>
         </dependency>
         <!--Spigot API-->
         <dependency>
@@ -111,6 +108,28 @@
             <version>1.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/APIs/ActivatedAPI.jar</systemPath>
+        </dependency>
+        <!--Helium API-->
+        <dependency>
+            <groupId>dev.rage.helium</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/APIs/HeliumAPI.jar</systemPath>
+        </dependency>
+        <!--Luckperms API-->
+        <dependency>
+            <groupId>net.luckperms</groupId>
+            <artifactId>api</artifactId>
+            <version>5.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--Vault API-->
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
