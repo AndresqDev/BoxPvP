@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static net.kappa.boxpvp.managers.list.FileManager.fileconfig;
 
@@ -30,15 +31,15 @@ public class ScoreboardFile {
 
         String bar;
         if (!content.getBoolean("scoreboard.options.invisible_bars"))
-            bar = ColorUtil.translate(content.getString("scoreboard.options.bars"));
+            bar = ColorUtil.translate(Objects.requireNonNull(content.getString("scoreboard.options.bars")));
         else bar = " ";
 
         lines.add(bar);
-        lines.addAll(ColorUtil.translate(content.getStringList("scoreboard.lines")));
+        lines.addAll(Objects.requireNonNull(ColorUtil.translate(content.getStringList("scoreboard.lines"))));
         lines.add(bar);
 
-        static_title = ColorUtil.translate(content.getString("scoreboard.options.title"));
-        static_footer = ColorUtil.translate(content.getString("scoreboard.options.footer"));
+        static_title = ColorUtil.translate(Objects.requireNonNull(content.getString("scoreboard.options.title")));
+        static_footer = ColorUtil.translate(Objects.requireNonNull(content.getString("scoreboard.options.footer")));
 
         animated_title = ColorUtil.translate(content.getStringList("scoreboard.animated.title"));
         animated_footer = ColorUtil.translate(content.getStringList("scoreboard.animated.footer"));

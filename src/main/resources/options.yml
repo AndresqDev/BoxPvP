@@ -1,8 +1,8 @@
-#Placeholders: %rank% %rank_expire% %player% %player_kills% %player_live% %date% %online_players%
+#Placeholders: %rank% %player% %player_kills% %player_live% %date% %online_players%
 #Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
 
 options:
-  chat_format: '&7[%rank%&7] &a%player%&7: &f'
+  chat_format: '%rank% &a%player%&7: &f'
   actionbar: '<hex:2C08BA> < <gradient:2C08BA>Welcome,<!gradient:2C08BA><hex:2C08BA> %player% >'
   # actionbar: '' = Disabled
 

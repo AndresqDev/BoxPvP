@@ -1,0 +1,11 @@
+##################################################
+#                                                #
+#                Messages Config                 #
+#                                                #
+##################################################
+
+#Placeholders: %rank% %player% %player_kills% %player_live% %date% %online_players% %server_prefix_admin%
+#Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
+
+messages:
+  plugin-prefix: "&7[&aBoxPvP&7]" # Placeholder: %server_prefix%

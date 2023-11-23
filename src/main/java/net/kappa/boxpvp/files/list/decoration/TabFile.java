@@ -40,7 +40,7 @@ public class TabFile {
                 .collect(Collectors.joining("\n"));
 
         tab_type = Objects.requireNonNull(content.getString("tablist.options.tab_type")).toLowerCase();
-        classic_format = ColorUtil.translate(content.getString("tablist.options.tab_classic_format"));
+        classic_format = ColorUtil.translate(Objects.requireNonNull(content.getString("tablist.options.tab_classic_format")));
 
         if (tab_type.equals("modern")) {
             Objects.requireNonNull(content.getConfigurationSection("tablist.custom_heads")).getKeys(false).forEach(entryName -> heads.add(new TabObject(content.getString(EntryUtil.getOf("tablist.custom_heads." + entryName, "placeholder")), content.getString(EntryUtil.getOf("tablist.custom_heads." + entryName, "value")), content.getString(EntryUtil.getOf("tablist.custom_heads." + entryName, "signature")))));

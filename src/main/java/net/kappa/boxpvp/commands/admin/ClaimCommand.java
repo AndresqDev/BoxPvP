@@ -1,5 +1,6 @@
 package net.kappa.boxpvp.commands.admin;
 
+import net.kappa.boxpvp.files.list.messages.AdminFile;
 import net.kappa.boxpvp.managers.list.ClaimManager;
 import net.kappa.boxpvp.managers.list.DataManager;
 import net.kappa.boxpvp.utils.CuboidUtil;
@@ -18,10 +19,10 @@ public class ClaimCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "No console.");
             return false;
         } else if (!sender.hasPermission("core.claim")) {
-            sender.sendMessage(ChatColor.RED + "No permission.");
+            sender.sendMessage(AdminFile.admin_general_noPermission);
             return false;
         } else if (args.length < 3) {
-            sender.sendMessage(ChatColor.RED + "Insufficient arguments.");
+            sender.sendMessage(AdminFile.admin_general_insufficientArgs);
             return false;
         }
 
@@ -32,20 +33,20 @@ public class ClaimCommand implements CommandExecutor {
  
         if(ClaimManager.containsWand(player)) {
             ClaimManager.putWand(player, new LocationObject());
-            player.sendMessage(ChatColor.GREEN + "Please select area using your hand! (Left click & Right Click)");
-            player.sendMessage(ChatColor.RED + "Execute again the command for cancel this action!");
+            player.sendMessage(AdminFile.admin_command_claim_unplacedPositions);
+            player.sendMessage(AdminFile.admin_command_claim_cancel);
             return true;
         } else {
             if(ClaimManager.getWand(player).getStart() == null || ClaimManager.getWand(player).getLast() == null) {
                 ClaimManager.removeWand(player);
-                player.sendMessage(ChatColor.RED + "Please select area using your hand! (Left click & Right Click)");
+                player.sendMessage(AdminFile.admin_command_claim_unplacedPositions);
                 return true;
             }
         }
 
         DataManager.addClaim(name, new CuboidUtil(ClaimManager.getWand(player).getStart(), ClaimManager.getWand(player).getLast()), pvp, mine);
         ClaimManager.removeWand(player);
-        player.sendMessage(ChatColor.GREEN + "Claim created!");
+        player.sendMessage(AdminFile.admin_command_claim_create);
 
         return true;
     }

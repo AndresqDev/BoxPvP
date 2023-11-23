@@ -1,0 +1,19 @@
+##################################################
+#                                                #
+#             Admin Messages Config              #
+#                                                #
+##################################################
+
+#Placeholders: %rank% %player% %player_kills% %player_live% %date% %online_players% %server_prefix_admin%
+#Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
+
+admin:
+  plugin-prefix: "&7[&aBoxPvP&7]" # Placeholder: %server_prefix_admin%
+  general:
+    noPermission: "No permission."
+    insufficientArgs: "Insufficient arguments."
+  commands:
+    claim:
+      create: "%server_prefix_admin% &aClaim created!"
+      unplacedPositions: "%server_prefix_admin% &aPlease select area using your hand! (Left click & Right Click)"
+      cancel: "%server_prefix_admin% &4Execute again the command for cancel this action!"
