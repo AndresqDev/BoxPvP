@@ -2,6 +2,8 @@ package net.kappa.boxpvp.listeners.list.system;
 
 import net.kappa.boxpvp.files.list.OptionsFile;
 import net.kappa.boxpvp.files.list.system.DataFile;
+import net.kappa.boxpvp.managers.list.ClaimManager;
+import net.kappa.boxpvp.utils.objects.ClaimObject;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,6 +24,10 @@ public class WorldInteractionsListener implements Listener {
     @EventHandler
     public void BreakBlocks(BlockBreakEvent event) {
         if (event.getPlayer().getGameMode() == GameMode.CREATIVE) return;
+        final ClaimObject claim = ClaimManager.getClaimAt(event.getBlock());
+
+        if (claim != null && claim.isMine()) return;
+
         event.setCancelled(!OptionsFile.world_block_break);
     }
 
@@ -34,6 +40,13 @@ public class WorldInteractionsListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void EntityDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
+        final ClaimObject claim = ClaimManager.getClaimAt(((Player) event.getEntity()).getPlayer());
+
+        if (claim != null && !claim.isPvP()) {
+            event.setCancelled(true);
+            return;
+        }
+
         event.setCancelled(!OptionsFile.world_entity_damage);
     }
 

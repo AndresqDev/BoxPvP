@@ -3,8 +3,10 @@ package net.kappa.boxpvp;
 import lib.fastboard.FastManager;
 import lib.ziggurat.TabAdapter;
 import lib.ziggurat.tab.Ziggurat;
+import net.kappa.boxpvp.commands.admin.ClaimCommand;
 import net.kappa.boxpvp.commands.admin.GamemodeCommand;
 import net.kappa.boxpvp.commands.admin.MineCommand;
+import net.kappa.boxpvp.commands.admin.RemoveClaimCommand;
 import net.kappa.boxpvp.commands.others.MsgCommand;
 import net.kappa.boxpvp.commands.social.DiscordCommand;
 import net.kappa.boxpvp.commands.social.StoreCommand;
@@ -103,6 +105,8 @@ public class Main extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("teamspeak")).setExecutor(new TeamSpeakCommand());
         Objects.requireNonNull(this.getCommand("twitter")).setExecutor(new TwitterCommand());
         // - Player Admin Commands
+        Objects.requireNonNull(this.getCommand("claim")).setExecutor(new ClaimCommand());
+        Objects.requireNonNull(this.getCommand("claimremove")).setExecutor(new RemoveClaimCommand());
         Objects.requireNonNull(this.getCommand("mine")).setExecutor(new MineCommand());
         Objects.requireNonNull(this.getCommand("gamemode")).setExecutor(new GamemodeCommand());
     }

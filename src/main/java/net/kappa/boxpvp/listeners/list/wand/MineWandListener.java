@@ -1,4 +1,4 @@
-package net.kappa.boxpvp.listeners.list.player;
+package net.kappa.boxpvp.listeners.list.wand;
 
 import net.kappa.boxpvp.managers.list.MineManager;
 import net.kappa.boxpvp.utils.objects.LocationObject;
@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class PlayerInteractListener implements Listener {
+public class MineWandListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();

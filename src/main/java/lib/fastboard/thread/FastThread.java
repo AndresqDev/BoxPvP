@@ -2,8 +2,6 @@ package lib.fastboard.thread;
 
 import lib.fastboard.FastManager;
 import net.kappa.boxpvp.files.list.decoration.ScoreboardFile;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class FastThread extends Thread {
     private final FastManager manager;
@@ -23,8 +21,7 @@ public class FastThread extends Thread {
     public void run() {
         try {
             while (this.running) {
-                this.manager.getAll().forEach((uuid, board) -> {
-                    final Player player = Bukkit.getPlayer(uuid);
+                this.manager.getAll().values().forEach(board -> {
                     board.updateLines(ScoreboardFile.lines);
                 });
                 Thread.sleep(ScoreboardFile.board_update_rate);

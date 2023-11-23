@@ -5,11 +5,12 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializable {
+public class CuboidUtil implements Iterable<Block>, Cloneable, ConfigurationSerializable {
     protected final String worldName;
     protected final int x1;
     protected final int y1;
@@ -18,7 +19,7 @@ public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializ
     protected final int y2;
     protected final int z2;
 
-    public Cuboid(Location l1, Location l2) {
+    public CuboidUtil(Location l1, Location l2) {
         if (!l1.getWorld().equals(l2.getWorld())) {
             throw new IllegalArgumentException("Locations must be on the same world");
         } else {
@@ -32,7 +33,7 @@ public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializ
         }
     }
 
-    public Cuboid(String serealized) {
+    public CuboidUtil(String serealized) {
         final String[] unserialized = serealized.split("\\|");
         final Location l1 = new Location(
                 Bukkit.getWorld(unserialized[0]),
@@ -57,11 +58,11 @@ public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializ
         this.z2 = Math.max(l1.getBlockZ(), l2.getBlockZ());
     }
 
-    public Cuboid(Cuboid other) {
+    public CuboidUtil(CuboidUtil other) {
         this(other.getWorld().getName(), other.x1, other.y1, other.z1, other.x2, other.y2, other.z2);
     }
 
-    private Cuboid(String worldName, int x1, int y1, int z1, int x2, int y2, int z2) {
+    private CuboidUtil(String worldName, int x1, int y1, int z1, int x2, int y2, int z2) {
         this.worldName = worldName;
         this.x1 = Math.min(x1, x2);
         this.x2 = Math.max(x1, x2);
@@ -110,20 +111,20 @@ public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializ
         return this.z2 - this.z1 + 1;
     }
 
-    public Cuboid unexpand(Cuboid.CuboidDirection dir, int amount) {
+    public CuboidUtil unexpand(CuboidUtil.CuboidDirection dir, int amount) {
         switch (dir) {
             case North:
-                return new Cuboid(this.worldName, this.x1 + amount, this.y1, this.z1, this.x2, this.y2, this.z2);
+                return new CuboidUtil(this.worldName, this.x1 + amount, this.y1, this.z1, this.x2, this.y2, this.z2);
             case South:
-                return new Cuboid(this.worldName, this.x1, this.y1, this.z1, this.x2 - amount, this.y2, this.z2);
+                return new CuboidUtil(this.worldName, this.x1, this.y1, this.z1, this.x2 - amount, this.y2, this.z2);
             case East:
-                return new Cuboid(this.worldName, this.x1, this.y1, this.z1 + amount, this.x2, this.y2, this.z2);
+                return new CuboidUtil(this.worldName, this.x1, this.y1, this.z1 + amount, this.x2, this.y2, this.z2);
             case West:
-                return new Cuboid(this.worldName, this.x1, this.y1, this.z1, this.x2, this.y2, this.z2 - amount);
+                return new CuboidUtil(this.worldName, this.x1, this.y1, this.z1, this.x2, this.y2, this.z2 - amount);
             case Down:
-                return new Cuboid(this.worldName, this.x1, this.y1 + amount, this.z1, this.x2, this.y2, this.z2);
+                return new CuboidUtil(this.worldName, this.x1, this.y1 + amount, this.z1, this.x2, this.y2, this.z2);
             case Up:
-                return new Cuboid(this.worldName, this.x1, this.y1, this.z1, this.x2, this.y2 - amount, this.z2);
+                return new CuboidUtil(this.worldName, this.x1, this.y1, this.z1, this.x2, this.y2 - amount, this.z2);
             default:
                 throw new IllegalArgumentException("Invalid direction " + dir);
         }
@@ -133,20 +134,20 @@ public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializ
         return this.getSizeX() * this.getSizeY() * this.getSizeZ();
     }
 
-    public Cuboid getFace(Cuboid.CuboidDirection dir) {
+    public CuboidUtil getFace(CuboidUtil.CuboidDirection dir) {
         switch (dir) {
             case North:
-                return new Cuboid(this.worldName, this.x1, this.y1, this.z1, this.x1, this.y2, this.z2);
+                return new CuboidUtil(this.worldName, this.x1, this.y1, this.z1, this.x1, this.y2, this.z2);
             case South:
-                return new Cuboid(this.worldName, this.x2, this.y1, this.z1, this.x2, this.y2, this.z2);
+                return new CuboidUtil(this.worldName, this.x2, this.y1, this.z1, this.x2, this.y2, this.z2);
             case East:
-                return new Cuboid(this.worldName, this.x1, this.y1, this.z1, this.x2, this.y2, this.z1);
+                return new CuboidUtil(this.worldName, this.x1, this.y1, this.z1, this.x2, this.y2, this.z1);
             case West:
-                return new Cuboid(this.worldName, this.x1, this.y1, this.z2, this.x2, this.y2, this.z2);
+                return new CuboidUtil(this.worldName, this.x1, this.y1, this.z2, this.x2, this.y2, this.z2);
             case Down:
-                return new Cuboid(this.worldName, this.x1, this.y1, this.z1, this.x2, this.y1, this.z2);
+                return new CuboidUtil(this.worldName, this.x1, this.y1, this.z1, this.x2, this.y1, this.z2);
             case Up:
-                return new Cuboid(this.worldName, this.x1, this.y2, this.z1, this.x2, this.y2, this.z2);
+                return new CuboidUtil(this.worldName, this.x1, this.y2, this.z1, this.x2, this.y2, this.z2);
             default:
                 throw new IllegalArgumentException("Invalid direction " + dir);
         }
@@ -189,13 +190,27 @@ public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializ
         return blocks;
     }
 
+    public boolean contains(Location location) {
+        return this.x1 <= location.getX() && this.x2 >= location.getX()
+                && this.y1 <= location.getY() && this.y2 >= location.getY()
+                && this.z1 <= location.getZ() && this.z2 >= location.getZ();
+    }
+
+    public boolean contains(Block block) {
+        return contains(block.getLocation());
+    }
+
+    public boolean contains(Player player) {
+        return contains(player.getLocation());
+    }
+
     public @NotNull Iterator<Block> iterator() {
         return new CuboidIterator(this.getWorld(), this.x1, this.y1, this.z1, this.x2, this.y2, this.z2);
     }
 
-    public Cuboid clone() throws CloneNotSupportedException {
-        Cuboid clone = (Cuboid) super.clone();
-        return new Cuboid(this);
+    public CuboidUtil clone() throws CloneNotSupportedException {
+        CuboidUtil clone = (CuboidUtil) super.clone();
+        return new CuboidUtil(this);
     }
 
     public enum CuboidDirection {

@@ -1,23 +1,18 @@
 package net.kappa.boxpvp.utils.objects;
 
 import net.kappa.boxpvp.utils.CuboidUtil;
-import org.bukkit.Material;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MineObject {
-    private final List<Material> types;
+public class ClaimObject {
     private String name;
     private CuboidUtil cuboid;
-    private int time;
+    private final boolean pvp;
+    private final boolean mine;
 
-    public MineObject(String name, CuboidUtil cuboid, int time, List<String> types){
-        this.types = new ArrayList<>();
+    public ClaimObject(String name, CuboidUtil cuboid, boolean pvp, boolean mine){
         this.name = name;
         this.cuboid = cuboid;
-        this.time = time;
-        types.forEach(t -> this.types.add(Material.getMaterial(t)));
+        this.pvp = pvp;
+        this.mine = mine;
     }
 
     public String getName() {
@@ -28,12 +23,12 @@ public class MineObject {
         return this.cuboid;
     }
 
-    public int getTime(){
-        return this.time;
+    public boolean isPvP(){
+        return this.pvp;
     }
 
-    public List<Material> getTypes() {
-        return this.types;
+    public boolean isMine() {
+        return this.mine;
     }
 
     public void setName(String name) {
