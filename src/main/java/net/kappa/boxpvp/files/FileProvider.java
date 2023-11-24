@@ -17,5 +17,7 @@ public class FileProvider {
         new OptionsFile();
         new TabFile();
         new ScoreboardFile();
+        new AdminFile();
+        new MessagesFile();
     }
 }
