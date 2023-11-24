@@ -19,6 +19,8 @@ public class ManagerProvider {
             put("options", "options.yml");
             put("tab", "decoration/tablist.yml");
             put("scoreboard", "decoration/scoreboard.yml");
+            put("admin", "messages/admin.yml");
+            put("messages", "messages/messages.yml");
         }});
     }
 
