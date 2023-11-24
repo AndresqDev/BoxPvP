@@ -5,22 +5,27 @@ import net.kappa.boxpvp.files.list.system.DataFile;
 import net.kappa.boxpvp.managers.list.ClaimManager;
 import net.kappa.boxpvp.utils.objects.ClaimObject;
 import org.bukkit.GameMode;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
-public class WorldInteractionsListener implements Listener {
+public class SystemListener implements Listener {
+    @EventHandler
+    public void onEntityCombust(EntityCombustEvent event) {
+        if (event.getEntity().getType() == EntityType.SKELETON) {
+            event.setCancelled(true);
+        }
+    }
+
     @EventHandler
     public void BreakBlocks(BlockBreakEvent event) {
         if (event.getPlayer().getGameMode() == GameMode.CREATIVE) return;

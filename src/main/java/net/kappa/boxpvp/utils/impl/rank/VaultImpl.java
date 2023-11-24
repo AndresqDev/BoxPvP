@@ -12,11 +12,16 @@ public class VaultImpl implements RankInterface {
 
     public VaultImpl() {
         final RegisteredServiceProvider<Chat> rsp = plugin.getServer().getServicesManager().getRegistration(Chat.class);
+        if (rsp == null) {
+            this.instance = null;
+            return;
+        }
         this.instance = rsp.getProvider();
     }
 
     @Override
     public String getGroupPrefix(Player player) {
+        if (instance == null) return "";
         if (this.instance.getPrimaryGroup(player) == null || this.instance.getGroupPrefix(player.getWorld(), this.instance.getPrimaryGroup(player)) == null)
             return "";
         else return this.instance.getGroupPrefix(player.getWorld(), this.instance.getPrimaryGroup(player));
@@ -24,6 +29,7 @@ public class VaultImpl implements RankInterface {
 
     @Override
     public String getGroupName(Player player) {
+        if (instance == null) return "";
         if (this.instance.getPrimaryGroup(player) == null) return "";
         return this.instance.getPrimaryGroup(player);
     }

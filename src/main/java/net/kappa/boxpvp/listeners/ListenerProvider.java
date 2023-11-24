@@ -1,7 +1,7 @@
 package net.kappa.boxpvp.listeners;
 
 import net.kappa.boxpvp.listeners.list.player.*;
-import net.kappa.boxpvp.listeners.list.system.WorldInteractionsListener;
+import net.kappa.boxpvp.listeners.list.system.SystemListener;
 import net.kappa.boxpvp.listeners.list.wand.ClaimWandListener;
 import net.kappa.boxpvp.listeners.list.wand.MineWandListener;
 import org.bukkit.plugin.PluginManager;
@@ -21,6 +21,6 @@ public class ListenerProvider {
         pm.registerEvents(new PlayerQuitListener(), plugin);
         pm.registerEvents(new ClaimWandListener(), plugin);
         pm.registerEvents(new MineWandListener(), plugin);
-        pm.registerEvents(new WorldInteractionsListener(), plugin);
+        pm.registerEvents(new SystemListener(), plugin);
     }
 }

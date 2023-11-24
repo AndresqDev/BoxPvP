@@ -12,12 +12,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import static net.kappa.boxpvp.managers.list.FileManager.fileconfig;
 
 public class DataFile {
     public static List<ClaimObject> claims = new ArrayList<>();
     public static List<MineObject> mines = new ArrayList<>();
+    public static List<UUID> combatloggers = new ArrayList<>();
     public static Location spawn_location;
     public static Location alternative_spawn;
 
@@ -29,6 +31,13 @@ public class DataFile {
         final FileConfiguration content = fileconfig.get("data");
         final ConfigurationSection claims = content.getConfigurationSection("claims");
         final ConfigurationSection mines = content.getConfigurationSection("mines");
+        final ConfigurationSection combatloggers = content.getConfigurationSection("combatloggers");
+
+
+        if(combatloggers != null)
+            combatloggers.getKeys(false).forEach(key -> DataFile.combatloggers.add(
+                    UUID.fromString(
+                            Objects.requireNonNull(content.getString("combatloggers." + key)))));
 
         if(claims != null)
             claims.getKeys(false).forEach(key -> DataFile.claims.add(new ClaimObject(

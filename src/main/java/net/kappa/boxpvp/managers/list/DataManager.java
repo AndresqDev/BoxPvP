@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static net.kappa.boxpvp.Main.plugin;
 import static net.kappa.boxpvp.managers.list.FileManager.fileconfig;
@@ -29,6 +30,33 @@ public class DataManager {
             exc.printStackTrace();
         }
     }
+
+    public static void addLogger(UUID uuid) {
+        final FileConfiguration content = fileconfig.get("data");
+
+        content.set("combatloggers", uuid.toString());
+        DataFile.combatloggers.add(uuid);
+
+        try {
+            content.save(filedata.get("data"));
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+    }
+
+    public static void removeLogger(UUID uuid) {
+        final FileConfiguration content = fileconfig.get("data");
+
+        content.set("combatloggers."+uuid.toString(), null);
+        DataFile.combatloggers.remove(uuid);
+
+        try {
+            content.save(filedata.get("data"));
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+    }
+
 
     public static void addClaim(String name, CuboidUtil cuboid, boolean pvp, boolean mine) {
         final FileConfiguration content = fileconfig.get("data");

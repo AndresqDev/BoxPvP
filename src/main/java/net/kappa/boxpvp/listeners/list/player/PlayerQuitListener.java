@@ -1,5 +1,9 @@
 package net.kappa.boxpvp.listeners.list.player;
 
+import net.kappa.boxpvp.managers.list.ClaimManager;
+import net.kappa.boxpvp.managers.list.DataManager;
+import net.kappa.boxpvp.utils.objects.ClaimObject;
+import net.kappa.boxpvp.utils.objects.CombatLoggerObject;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,5 +13,11 @@ public class PlayerQuitListener implements Listener {
     @EventHandler
     public static void onPlayerQuit(PlayerQuitEvent event) {
         final Player player = event.getPlayer();
+        final ClaimObject claim = ClaimManager.getClaimAt(player);
+
+        if (claim == null || claim.isPvP()) {
+            new CombatLoggerObject(player);
+            DataManager.addLogger(player.getUniqueId());
+        }
     }
 }

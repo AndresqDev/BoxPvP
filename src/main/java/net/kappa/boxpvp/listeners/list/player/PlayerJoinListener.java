@@ -2,6 +2,7 @@ package net.kappa.boxpvp.listeners.list.player;
 
 import net.kappa.boxpvp.files.list.OptionsFile;
 import net.kappa.boxpvp.files.list.system.DataFile;
+import net.kappa.boxpvp.managers.list.CombatManager;
 import net.kappa.boxpvp.utils.PlaceholderUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,10 +15,13 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         final boolean[] permission_found = {false};
-        if (DataFile.spawn_location == null) player.teleport(DataFile.alternative_spawn);
-        else player.teleport(DataFile.spawn_location);
+
+        if (DataFile.combatloggers.contains(player.getUniqueId()))
+            CombatManager.applyPunishment(player);
+
         event.setJoinMessage(null);
         player.setAllowFlight(true);
+
         for (int i = 0; i < 100; i++) player.sendMessage(" ");
         PlaceholderUtil.setPlaceholders(player, OptionsFile.message_join_format).forEach(player::sendMessage);
         OptionsFile.message_global_join_format.forEach(obj -> {

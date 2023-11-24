@@ -1,7 +1,6 @@
 package net.kappa.boxpvp.utils;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.kappa.boxpvp.files.list.messages.AdminFile;
 import net.kappa.boxpvp.managers.list.RankManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
@@ -21,8 +20,8 @@ public class PlaceholderUtil {
                 .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
                 .replace("%rank%", ColorUtil.translate(RankManager.getImpl().getGroupPrefix(player)).replace("[", "").replace("]", ""))
                 .replace("%date%", LocalDate.now().toString()))
-                .replace("%server_prefix_admin%", AdminFile.pluginPrefix)
-                .replace("%server_prefix%", AdminFile.pluginPrefix);
+                .replace("%server_prefix_admin%", "")
+                .replace("%server_prefix%", "");
     }
 
     public static List<String> setPlaceholders(Player player, List<String> strs) {
