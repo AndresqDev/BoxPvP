@@ -20,28 +20,31 @@ import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-public class ProtocolLibTabImpl implements IZigguratHelper {
+public class ProtocolLib5TabImpl implements IZigguratHelper {
     private static ProtocolManager pm;
     private final PacketAdapter sb;
     private final PacketAdapter pi;
 
-    public ProtocolLibTabImpl(final Ziggurat ziggurat) {
+    public ProtocolLib5TabImpl(final Ziggurat ziggurat) {
         pm = ProtocolLibrary.getProtocolManager();
         this.sb = new PacketAdapter(ziggurat.getPlugin(), ListenerPriority.MONITOR, PacketType.Play.Server.SCOREBOARD_TEAM) {
 
             public void onPacketSending(PacketEvent event) {
                 try {
                     PacketContainer packet = event.getPacket();
-                    int mode = event.getPacket().getIntegers().read(1);
-                    if (mode == 4 && !event.getPacket().getStrings().read(0).equals("\u000181")) {
-                        packet.getIntegers().write(1, 3);
-                        packet.getStrings().write(0, "\u000181");
-                        packet.getStrings().write(1, "\u000181");
+                    if (packet.getIntegers().size() > 1) {
+                        int mode = packet.getIntegers().read(1);
+                        if (mode == 4 && !packet.getStrings().read(0).equals("\u000181")) {
+                            packet.getIntegers().write(1, 3);
+                            if (packet.getStrings().size() > 1) {
+                                packet.getStrings().write(0, "\u000181");
+                                packet.getStrings().write(1, "\u000181");
+                            }
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -86,8 +89,8 @@ public class ProtocolLibTabImpl implements IZigguratHelper {
     public static void sendPacket(Player player, PacketContainer packetContainer) {
         try {
             pm.sendServerPacket(player, packetContainer);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+
         }
     }
 
@@ -95,6 +98,23 @@ public class ProtocolLibTabImpl implements IZigguratHelper {
     public void cleanup() {
         pm.removePacketListener(this.pi);
         pm.removePacketListener(this.sb);
+    }
+
+    @Override
+    public void updateHeaderAndFooter(ZigguratTablistClassic zigguratTablist, String header, String footer) {
+        Player player = zigguratTablist.getPlayer();
+        PacketContainer headerAndFooter = new PacketContainer(PacketType.Play.Server.PLAYER_LIST_HEADER_FOOTER);
+        if (PlayerUtility.getPlayerVersionRaw(player) < 735) {
+            headerAndFooter.getChatComponents().write(0, WrappedChatComponent.fromText(header));
+            headerAndFooter.getChatComponents().write(1, WrappedChatComponent.fromText(footer));
+        } else {
+            String headerJson = ComponentSerializer.toString(TextComponent.fromLegacyText(header));
+            String footerJson = ComponentSerializer.toString(TextComponent.fromLegacyText(footer));
+            headerAndFooter.getChatComponents().write(0, WrappedChatComponent.fromJson(headerJson));
+            headerAndFooter.getChatComponents().write(1, WrappedChatComponent.fromJson(footerJson));
+        }
+
+        ProtocolLib5TabImpl.sendPacket(player, headerAndFooter);
     }
 
     @Override
@@ -110,7 +130,7 @@ public class ProtocolLibTabImpl implements IZigguratHelper {
             playerInfoData.getProfile().getProperties().put("textures", new WrappedSignedProperty("textures", ZigguratCommons.defaultTexture.SKIN_VALUE, ZigguratCommons.defaultTexture.SKIN_SIGNATURE));
         }
         packet.getPlayerInfoDataLists().write(0, Collections.singletonList(playerInfoData));
-        ProtocolLibTabImpl.sendPacket(player, packet);
+        ProtocolLib5TabImpl.sendPacket(player, packet);
         return new TabEntry(string, uuid, "", ZigguratCommons.defaultTexture, column, slot, rawSlot, 1);
     }
 
@@ -123,7 +143,7 @@ public class ProtocolLibTabImpl implements IZigguratHelper {
         WrappedGameProfile profile = new WrappedGameProfile(tabEntry.getUuid(), playerVersion != PlayerVersion.v1_7 ? tabEntry.getId() : LegacyClientUtils.tabEntrys.get(tabEntry.getRawSlot() - 1));
         PlayerInfoData playerInfoData = new PlayerInfoData(profile, 1, EnumWrappers.NativeGameMode.SURVIVAL, WrappedChatComponent.fromText(playerVersion != PlayerVersion.v1_7 ? "" : profile.getName()));
         packet.getPlayerInfoDataLists().write(0, Collections.singletonList(playerInfoData));
-        ProtocolLibTabImpl.sendPacket(player, packet);
+        ProtocolLib5TabImpl.sendPacket(player, packet);
     }
 
     @Override
@@ -155,11 +175,10 @@ public class ProtocolLibTabImpl implements IZigguratHelper {
                 playerInfoData = new PlayerInfoData(profile, 1, EnumWrappers.NativeGameMode.SURVIVAL, WrappedChatComponent.fromJson(displayNameJson));
             }
             packet.getPlayerInfoDataLists().write(0, Collections.singletonList(playerInfoData));
-            ProtocolLibTabImpl.sendPacket(player, packet);
+            ProtocolLib5TabImpl.sendPacket(player, packet);
         }
         tabEntry.setText(text);
     }
-
     @Override
     public void updateFakeLatency(ZigguratTablistModern zigguratTablist, TabEntry tabEntry, Integer latency) {
         PacketContainer packet = pm.createPacket(PacketType.Play.Server.PLAYER_INFO);
@@ -167,7 +186,7 @@ public class ProtocolLibTabImpl implements IZigguratHelper {
         WrappedGameProfile profile = new WrappedGameProfile(tabEntry.getUuid(), tabEntry.getId());
         PlayerInfoData playerInfoData = new PlayerInfoData(profile, latency, EnumWrappers.NativeGameMode.SURVIVAL, WrappedChatComponent.fromText(tabEntry.getText()));
         packet.getPlayerInfoDataLists().write(0, Collections.singletonList(playerInfoData));
-        ProtocolLibTabImpl.sendPacket(zigguratTablist.getPlayer(), packet);
+        ProtocolLib5TabImpl.sendPacket(zigguratTablist.getPlayer(), packet);
         tabEntry.setLatency(latency);
     }
 
@@ -184,43 +203,30 @@ public class ProtocolLibTabImpl implements IZigguratHelper {
         PacketContainer add = pm.createPacket(PacketType.Play.Server.PLAYER_INFO);
         add.getPlayerInfoAction().write(0, EnumWrappers.PlayerInfoAction.ADD_PLAYER);
         add.getPlayerInfoDataLists().write(0, Collections.singletonList(playerInfoData));
-        ProtocolLibTabImpl.sendPacket(player, remove);
-        ProtocolLibTabImpl.sendPacket(player, add);
+        ProtocolLib5TabImpl.sendPacket(player, remove);
+        ProtocolLib5TabImpl.sendPacket(player, add);
         tabEntry.setTexture(skinTexture);
     }
 
     @Override
-    public void updateHeaderAndFooter(ZigguratTablistModern zigguratTablist, String header, String footer) {
-        Player player = zigguratTablist.getPlayer();
-        PacketContainer headerAndFooter = new PacketContainer(PacketType.Play.Server.PLAYER_LIST_HEADER_FOOTER);
+    public void updateHeaderAndFooter(ZigguratTablistModern var1, String var2, String var3) {
+        Player player = var1.getPlayer();
+        PacketContainer headerAndFooter = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.PLAYER_LIST_HEADER_FOOTER);
         if (PlayerUtility.getPlayerVersionRaw(player) < 735) {
-            headerAndFooter.getChatComponents().write(0, WrappedChatComponent.fromText(header));
-            headerAndFooter.getChatComponents().write(1, WrappedChatComponent.fromText(footer));
+            headerAndFooter.getChatComponents().write(0, WrappedChatComponent.fromText(var2));
+            headerAndFooter.getChatComponents().write(1, WrappedChatComponent.fromText(var3));
         } else {
-            String headerJson = ComponentSerializer.toString(TextComponent.fromLegacyText(header));
-            String footerJson = ComponentSerializer.toString(TextComponent.fromLegacyText(footer));
+            String headerJson = ComponentSerializer.toString(TextComponent.fromLegacyText(var2));
+            String footerJson = ComponentSerializer.toString(TextComponent.fromLegacyText(var3));
             headerAndFooter.getChatComponents().write(0, WrappedChatComponent.fromJson(headerJson));
             headerAndFooter.getChatComponents().write(1, WrappedChatComponent.fromJson(footerJson));
         }
 
-        ProtocolLibTabImpl.sendPacket(player, headerAndFooter);
-    }
+        try {
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player, headerAndFooter);
+        } catch (Exception ignored){
 
-    @Override
-    public void updateHeaderAndFooter(ZigguratTablistClassic zigguratTablist, String header, String footer) {
-        Player player = zigguratTablist.getPlayer();
-        PacketContainer headerAndFooter = new PacketContainer(PacketType.Play.Server.PLAYER_LIST_HEADER_FOOTER);
-        if (PlayerUtility.getPlayerVersionRaw(player) < 735) {
-            headerAndFooter.getChatComponents().write(0, WrappedChatComponent.fromText(header));
-            headerAndFooter.getChatComponents().write(1, WrappedChatComponent.fromText(footer));
-        } else {
-            String headerJson = ComponentSerializer.toString(TextComponent.fromLegacyText(header));
-            String footerJson = ComponentSerializer.toString(TextComponent.fromLegacyText(footer));
-            headerAndFooter.getChatComponents().write(0, WrappedChatComponent.fromJson(headerJson));
-            headerAndFooter.getChatComponents().write(1, WrappedChatComponent.fromJson(footerJson));
         }
-
-        ProtocolLibTabImpl.sendPacket(player, headerAndFooter);
     }
 }
 

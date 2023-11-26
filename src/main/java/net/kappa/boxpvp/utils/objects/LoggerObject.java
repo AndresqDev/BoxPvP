@@ -10,15 +10,13 @@ import org.bukkit.craftbukkit.v1_16_R3.util.CraftChatMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.stream.Stream;
-
-public class CombatLoggerObject extends EntitySkeleton {
+public class LoggerObject extends EntitySkeleton {
     private final World world;
     private final ItemStack[] contents;
     private final ItemStack[] armor;
     private final Player player;
 
-    public CombatLoggerObject(Player player) {
+    public LoggerObject(Player player) {
         super(EntityTypes.SKELETON, ((CraftWorld)player.getWorld()).getHandle());
 
         this.world = player.getWorld();

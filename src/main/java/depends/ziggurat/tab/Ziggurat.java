@@ -2,16 +2,19 @@ package depends.ziggurat.tab;
 
 import depends.ziggurat.ServerUtility;
 import depends.ziggurat.tab.utils.IZigguratHelper;
-import depends.ziggurat.tab.utils.impl.ProtocolLibTabImpl;
+import depends.ziggurat.tab.utils.impl.ProtocolLib4TabImpl;
+import depends.ziggurat.tab.utils.impl.ProtocolLib5TabImpl;
 import depends.ziggurat.utils.UtilityManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.kappa.boxpvp.Main.pluginManager;
 
 public class Ziggurat {
     private final JavaPlugin plugin;
@@ -36,8 +39,12 @@ public class Ziggurat {
     }
 
     private void registerImplementation() {
-        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") != null) {
-            this.implementation = new ProtocolLibTabImpl(this);
+        final Plugin protocollib = pluginManager.getPlugin("ProtocolLib");
+        if (protocollib != null) {
+            if(protocollib.getDescription().getVersion().startsWith("4"))
+                this.implementation = new ProtocolLib4TabImpl(this);
+            else
+                this.implementation = new ProtocolLib5TabImpl(this);
             this.plugin.getLogger().info("[Z-Tab] Registered Implementation with ProtocolLib");
             return;
         }

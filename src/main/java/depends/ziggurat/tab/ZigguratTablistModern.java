@@ -2,7 +2,7 @@ package depends.ziggurat.tab;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import depends.ziggurat.tab.utils.*;
-import depends.ziggurat.tab.utils.impl.ProtocolLibTabImpl;
+import depends.ziggurat.tab.utils.impl.ProtocolLib4TabImpl;
 import depends.ziggurat.utils.PlayerUtility;
 import depends.ziggurat.utils.playerversion.PlayerVersion;
 import org.bukkit.Bukkit;
@@ -81,7 +81,7 @@ public class ZigguratTablistModern {
             if (team != null) {
                 team.unregister();
             }
-            boolean skip = this.ziggurat.getImplementation() instanceof ProtocolLibTabImpl && (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null || !Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("ProtocolLib")).isEnabled() || ProtocolLibrary.getProtocolManager() == null);
+            boolean skip = this.ziggurat.getImplementation() instanceof ProtocolLib4TabImpl && (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null || !Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("ProtocolLib")).isEnabled() || ProtocolLibrary.getProtocolManager() == null);
             if (skip) continue;
             this.getZiggurat().getImplementation().destroyFakePlayer(this, tabEntry, null);
             this.getZiggurat().getImplementation().cleanup();
