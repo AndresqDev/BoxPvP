@@ -7,4 +7,10 @@ public class CombatManager {
         player.getInventory().clear();
         player.setHealth(0.0D);
     }
+
+    public static void addPvPTag(Player player) {
+        if (TimerManager.isActive(player, "pvp"))
+            TimerManager.addTimer(player, "pvp", 30);
+        else TimerManager.setRestant(player, "pvp", 30);
+    }
 }

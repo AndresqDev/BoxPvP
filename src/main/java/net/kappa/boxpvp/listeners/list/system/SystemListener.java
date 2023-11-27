@@ -3,6 +3,8 @@ package net.kappa.boxpvp.listeners.list.system;
 import net.kappa.boxpvp.files.list.OptionsFile;
 import net.kappa.boxpvp.files.list.system.DataFile;
 import net.kappa.boxpvp.managers.list.ClaimManager;
+import net.kappa.boxpvp.managers.list.CombatManager;
+import net.kappa.boxpvp.managers.list.TimerManager;
 import net.kappa.boxpvp.utils.objects.ClaimObject;
 import org.bukkit.GameMode;
 import org.bukkit.entity.EntityType;
@@ -43,14 +45,22 @@ public class SystemListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void EntityDamage(EntityDamageEvent event) {
+    public void EntityDamage(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player)) return;
         if (!(event.getEntity() instanceof Player)) return;
-        final ClaimObject claim = ClaimManager.getClaimAt(((Player) event.getEntity()).getPlayer());
+        final Player player = ((Player) event.getEntity()).getPlayer();
+        final Player damager = ((Player) event.getDamager()).getPlayer();
 
-        if (claim != null && !claim.isPvP()) {
+        final ClaimObject claim = ClaimManager.getClaimAt(player);
+
+        if (TimerManager.isActive(player, "pvp") &&
+                claim != null && !claim.isPvP()) {
             event.setCancelled(true);
             return;
         }
+
+        CombatManager.addPvPTag(damager);
+        CombatManager.addPvPTag(player);
 
         event.setCancelled(!OptionsFile.world_entity_damage);
     }
