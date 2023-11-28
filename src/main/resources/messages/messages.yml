@@ -9,3 +9,18 @@
 
 messages:
   plugin-prefix: "&7[&aBoxPvP&7]" # Placeholder: %server_prefix%
+
+  social_links:
+    store: '&b[Store]&7: &fstore.server.net'
+    discord: '&b[Discord]&7: &fdiscord.gg/server'
+    twitter: '&b[Twitter]&7: &ftwitter.com/@User'
+    ts: '&b[TeamSpeak]&7: &fts.server.net'
+
+  private_messages:
+    send_format: '&7(To %target%): &f'
+    receive_format: '&7(From %target%): &f'
+
+  join_message:
+    - '&7&m----------------------'
+    - '   <hex:2C08BA>Welcome to the server!'
+    - '&7&m----------------------'

@@ -12,19 +12,13 @@ import java.util.Objects;
 import static net.kappa.boxpvp.managers.list.FileManager.fileconfig;
 
 public class OptionsFile {
-    // - Blocking Options
+    // - Blocking
     public static List<String> blocked_words;
     public static List<String> blocked_commands;
     public static String blocked_word_msg;
     public static String blocked_commands_msg;
 
-    // - SocialLinks Options
-    public static String social_store;
-    public static String social_discord;
-    public static String social_twitter;
-    public static String social_ts;
-
-    // - World Options
+    // - World
     public static boolean world_block_break;
     public static boolean world_block_place;
     public static boolean world_weather_changes;
@@ -34,16 +28,21 @@ public class OptionsFile {
     public static boolean world_item_drop;
     public static boolean world_item_pickup;
 
-    // - Messages Options
+    // - Messages
     public static List<MessageObject> message_timed_objects = new ArrayList<>();
     public static List<MessageObject> message_global_join_format = new ArrayList<>();
-    public static List<String> message_join_format;
-    public static String message_send_format;
-    public static String message_receive_format;
+
+    // - ActionBar
+    public static String actionbar_join;
+    public static Boolean actionbar_join_enabled;
+    public static String actionbar_pvp;
+    public static Boolean actionbar_pvp_enabled;
+
+    // - CombatLog
+    public static String combatlog_name;
 
     // - Other Options
     public static String others_chatformat_placeholder;
-    public static String others_actionbar_placeholder;
     public static int others_clearlag_delay;
 
     public OptionsFile() {
@@ -53,19 +52,13 @@ public class OptionsFile {
     private void setup() {
         final FileConfiguration content = fileconfig.get("options");
 
-        //Blocking options
-        blocked_words = content.getStringList("options.blocked_words");
-        blocked_commands = content.getStringList("options.blocked_commands");
-        blocked_word_msg = ColorUtil.translate(content.getString("options.blocked_word_msg"));
-        blocked_commands_msg = ColorUtil.translate(content.getString("options.blocked_commands_msg"));
+        //Blocking
+        blocked_words = content.getStringList("options.chat.blocked_words");
+        blocked_commands = content.getStringList("options.chat.blocked_commands");
+        blocked_word_msg = ColorUtil.translate(content.getString("options.chat.blocked_word_msg"));
+        blocked_commands_msg = ColorUtil.translate(content.getString("options.chat.blocked_commands_msg"));
 
-        //SocialLinks Options
-        social_store = ColorUtil.translate(content.getString("options.social_links.store"));
-        social_discord = ColorUtil.translate(content.getString("options.social_links.discord"));
-        social_twitter = ColorUtil.translate(content.getString("options.social_links.twitter"));
-        social_ts = ColorUtil.translate(content.getString("options.social_links.ts"));
-
-        //World Options
+        //World
         world_block_break = content.getBoolean("options.world.block_break");
         world_block_place = content.getBoolean("options.world.block_place");
         world_weather_changes = content.getBoolean("options.world.weather_changes");
@@ -75,16 +68,21 @@ public class OptionsFile {
         world_item_drop = content.getBoolean("options.world.item_drop");
         world_item_pickup = content.getBoolean("options.world.item_pickup");
 
-        //Messages Options
-        Objects.requireNonNull(content.getConfigurationSection("options.automatic_messages")).getKeys(false).forEach(entryName -> message_timed_objects.add(new MessageObject(ColorUtil.translate(content.getStringList(EntryUtil.getOf("options.automatic_messages." + entryName, "message"))), content.getInt(EntryUtil.getOf("options.automatic_messages." + entryName, "time")))));
-        Objects.requireNonNull(content.getConfigurationSection("options.global_join_message")).getKeys(false).forEach(entryName -> message_global_join_format.add(new MessageObject(content.getString(EntryUtil.getOf("options.global_join_message." + entryName, "permission")), ColorUtil.translate(content.getString(EntryUtil.getOf("options.global_join_message." + entryName, "message"))))));
-        message_join_format = ColorUtil.translate(content.getStringList("options.default_join_message"));
-        message_send_format = ColorUtil.translate(content.getString("options.private_messages.send_format"));
-        message_receive_format = ColorUtil.translate(content.getString("options.private_messages.receive_format"));
+        //Messages
+        Objects.requireNonNull(content.getConfigurationSection("options.chat.automatic_messages")).getKeys(false).forEach(entryName -> message_timed_objects.add(new MessageObject(ColorUtil.translate(content.getStringList(EntryUtil.getOf("options.chat.automatic_messages." + entryName, "message"))), content.getInt(EntryUtil.getOf("options.chat.automatic_messages." + entryName, "time")))));
+        Objects.requireNonNull(content.getConfigurationSection("options.chat.global_join_message")).getKeys(false).forEach(entryName -> message_global_join_format.add(new MessageObject(content.getString(EntryUtil.getOf("options.chat.global_join_message." + entryName, "permission")), ColorUtil.translate(content.getString(EntryUtil.getOf("options.chat.global_join_message." + entryName, "message"))))));
 
-        //Other Options
-        others_chatformat_placeholder = ColorUtil.translate(content.getString("options.chat_format"));
-        others_actionbar_placeholder = ColorUtil.translate(content.getString("options.actionbar"));
-        others_clearlag_delay = content.getInt("options.clearlag_delay");
+        //Actionbar
+        actionbar_join = ColorUtil.translate(content.getString("options.actionbar.join"));
+        actionbar_join_enabled = content.getBoolean("options.actionbar.join.enabled");
+        actionbar_pvp = ColorUtil.translate(content.getString("options.actionbar.pvp"));
+        actionbar_pvp_enabled = content.getBoolean("options.actionbar.pvp.enabled");
+
+        //CombatLog
+        combatlog_name = ColorUtil.translate(content.getString("options.combatlog.entity.name"));
+
+        //Other
+        others_chatformat_placeholder = ColorUtil.translate(content.getString("options.chat.chat_format"));
+        others_clearlag_delay = content.getInt("options.lag.clearlag_delay");
     }
 }

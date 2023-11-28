@@ -12,8 +12,31 @@ admin:
   general:
     noPermission: "No permission."
     insufficientArgs: "Insufficient arguments."
+
   commands:
     claim:
       create: "%server_prefix_admin% &aClaim created!"
       unplacedPositions: "%server_prefix_admin% &aPlease select area using your hand! (Left click & Right Click)"
       cancel: "%server_prefix_admin% &4Execute again the command for cancel this action!"
+
+  helpcmd:
+    claim:
+      - "&7&m------------------------------------------------------------------------------------------------------"
+      - "&7Claims - Help"
+      - ""
+      - "&7/claim create <Nombre> <Estado de PvP> <Es una mina?>"
+      - "&7/claim remove <Nombre>"
+      - ""
+      - "&8Usa el comando una vez para activar la seleccion de area y dos veces para crear el area si haz"
+      - "&8seleccionado el area en caso contrario se cancelara la seleccion activando dos veces el comando"
+      - "&7&m------------------------------------------------------------------------------------------------------"
+    mine:
+      - "&7&m------------------------------------------------------------------------------------------------------"
+      - "&7Mines - Help"
+      - ""
+      - "&7/mine create <Nombre> <Estado de PvP> <Es una mina?>"
+      - "&7/mine remove <Nombre>"
+      - ""
+      - "&8Usa el comando una vez para activar la seleccion de area y dos veces para crear el area si haz"
+      - "&8seleccionado el area en caso contrario se cancelara la seleccion activando dos veces el comando"
+      - "&7&m------------------------------------------------------------------------------------------------------"

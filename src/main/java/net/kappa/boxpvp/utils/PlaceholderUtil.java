@@ -1,7 +1,10 @@
 package net.kappa.boxpvp.utils;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.kappa.boxpvp.files.list.messages.AdminFile;
+import net.kappa.boxpvp.files.list.messages.MessagesFile;
 import net.kappa.boxpvp.managers.list.RankManager;
+import net.kappa.boxpvp.managers.list.TimerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
@@ -20,8 +23,9 @@ public class PlaceholderUtil {
                 .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
                 .replace("%rank%", ColorUtil.translate(RankManager.getImpl().getGroupPrefix(player)).replace("[", "").replace("]", ""))
                 .replace("%date%", LocalDate.now().toString()))
-                .replace("%server_prefix_admin%", "")
-                .replace("%server_prefix%", "");
+                .replace("%server_prefix_admin%", AdminFile.pluginPrefix)
+                .replace("%server_prefix%", MessagesFile.pluginPrefix)
+                .replace("%pvp_timer%", TimerManager.getRestant(player, "pvp"));
     }
 
     public static List<String> setPlaceholders(Player player, List<String> strs) {
@@ -32,7 +36,10 @@ public class PlaceholderUtil {
                         .replace("%player_kills%", String.valueOf(player.getStatistic(Statistic.PLAYER_KILLS)))
                         .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
                         .replace("%rank%", Objects.requireNonNull(ColorUtil.translate(RankManager.getImpl().getGroupPrefix(player)))).replace("[", "").replace("]", "")
-                        .replace("%date%", LocalDate.now().toString().replace("-", ", ")))
+                        .replace("%date%", LocalDate.now().toString().replace("-", ", "))
+                        .replace("%server_prefix_admin%", "")
+                        .replace("%server_prefix%", "")
+                        .replace("%pvp_timer%", TimerManager.getRestant(player, "pvp")))
                 .collect(Collectors.toList()));
     }
 

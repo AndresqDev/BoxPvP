@@ -1,6 +1,7 @@
 package net.kappa.boxpvp.commands.others;
 
 import net.kappa.boxpvp.files.list.OptionsFile;
+import net.kappa.boxpvp.files.list.messages.MessagesFile;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -29,8 +30,8 @@ public class MsgCommand implements CommandExecutor {
             return false;
         }
 
-        player.sendMessage(OptionsFile.message_send_format.replace("%target%", target.getName()));
-        target.sendMessage(OptionsFile.message_receive_format.replace("%target%", target.getName()));
+        player.sendMessage(MessagesFile.private_message_send_format.replace("%target%", target.getName()));
+        target.sendMessage(MessagesFile.private_message_receive_format.replace("%target%", target.getName()));
         return true;
     }
 }

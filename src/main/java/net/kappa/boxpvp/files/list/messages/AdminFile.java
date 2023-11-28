@@ -3,6 +3,7 @@ package net.kappa.boxpvp.files.list.messages;
 import net.kappa.boxpvp.utils.ColorUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.List;
 import java.util.Objects;
 
 import static net.kappa.boxpvp.managers.list.FileManager.fileconfig;
@@ -22,6 +23,9 @@ public class AdminFile {
     public static String admin_command_claim_unplacedPositions;
     public static String admin_command_claim_cancel;
 
+    // Help Messages
+    public static List<String> helpcmd_claim;
+    public static List<String> helpcmd_mine;
     public AdminFile() {
         this.setup();
     }
@@ -42,6 +46,8 @@ public class AdminFile {
         admin_command_claim_unplacedPositions = ColorUtil.translate(Objects.requireNonNull(content.getString("admin.commands.claim.unplacedPositions")));
         admin_command_claim_cancel = ColorUtil.translate(Objects.requireNonNull(content.getString("admin.commands.claim.cancel")));
 
-
+        // Help Messages
+        helpcmd_claim = ColorUtil.translate(content.getStringList("admin.helpcmd.claim"));
+        helpcmd_mine = ColorUtil.translate(content.getStringList("admin.helpcmd.mine"));
     }
 }

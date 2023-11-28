@@ -1,6 +1,8 @@
 package net.kappa.boxpvp.listeners.list.player;
 
+import com.mojang.serialization.MapEncoder;
 import net.kappa.boxpvp.files.list.OptionsFile;
+import net.kappa.boxpvp.files.list.messages.MessagesFile;
 import net.kappa.boxpvp.files.list.system.DataFile;
 import net.kappa.boxpvp.managers.list.CombatManager;
 import net.kappa.boxpvp.utils.PlaceholderUtil;
@@ -23,7 +25,7 @@ public class PlayerJoinListener implements Listener {
         player.setAllowFlight(true);
 
         for (int i = 0; i < 100; i++) player.sendMessage(" ");
-        PlaceholderUtil.setPlaceholders(player, OptionsFile.message_join_format).forEach(player::sendMessage);
+        PlaceholderUtil.setPlaceholders(player, MessagesFile.message_join_format).forEach(player::sendMessage);
         OptionsFile.message_global_join_format.forEach(obj -> {
             if (permission_found[0]) return;
             if (player.hasPermission(obj.getPermission())) {

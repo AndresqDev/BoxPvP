@@ -6,7 +6,6 @@ import depends.ziggurat.tab.Ziggurat;
 import net.kappa.boxpvp.commands.admin.ClaimCommand;
 import net.kappa.boxpvp.commands.admin.GamemodeCommand;
 import net.kappa.boxpvp.commands.admin.MineCommand;
-import net.kappa.boxpvp.commands.admin.RemoveClaimCommand;
 import net.kappa.boxpvp.commands.others.MsgCommand;
 import net.kappa.boxpvp.commands.social.DiscordCommand;
 import net.kappa.boxpvp.commands.social.StoreCommand;
