@@ -4,7 +4,6 @@ import depends.fastboard.FastManager;
 import depends.ziggurat.TabAdapter;
 import depends.ziggurat.tab.Ziggurat;
 import net.kappa.boxpvp.commands.admin.ClaimCommand;
-import net.kappa.boxpvp.commands.admin.GamemodeCommand;
 import net.kappa.boxpvp.commands.admin.MineCommand;
 import net.kappa.boxpvp.commands.others.MsgCommand;
 import net.kappa.boxpvp.commands.social.DiscordCommand;
@@ -25,8 +24,9 @@ import java.io.File;
 import java.util.Objects;
 
 public class Main extends JavaPlugin {
-    //Instance & Protocol
+    //Instance & Version
     public static Main plugin;
+    public static String version;
     public static int pseudoProtocol;
     //Scheduler
     public static BukkitScheduler scheduler;
@@ -45,7 +45,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         final String a = getServer().getClass().getPackage().getName();
-        final String version = a.substring(a.lastIndexOf('.') + 1);
+        version = a.substring(a.lastIndexOf('.') + 1);
 
         pseudoProtocol = Integer.parseInt(version.split("_")[1]);
         plugin = this;
@@ -106,7 +106,6 @@ public class Main extends JavaPlugin {
         // - Player Admin Commands
         Objects.requireNonNull(this.getCommand("claim")).setExecutor(new ClaimCommand());
         Objects.requireNonNull(this.getCommand("mine")).setExecutor(new MineCommand());
-        Objects.requireNonNull(this.getCommand("gamemode")).setExecutor(new GamemodeCommand());
     }
 
     private void setupImplements() {

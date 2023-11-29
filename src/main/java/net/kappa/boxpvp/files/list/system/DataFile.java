@@ -44,8 +44,8 @@ public class DataFile {
                     key,
                     new CuboidUtil(
                             Objects.requireNonNull(content.getString("claims." + key + ".cuboid")))
-                    , content.getBoolean("mines." + key + ".pvp")
-                    , content.getBoolean("mines." + key + ".mine"))));
+                    , content.getBoolean("claims." + key + ".pvp")
+                    , content.getBoolean("claims." + key + ".mine"))));
 
         if(mines != null)
             mines.getKeys(false).forEach(key -> {

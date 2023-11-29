@@ -63,6 +63,7 @@ public class DataManager {
 
         content.set("claims."+name+".pvp", pvp);
         content.set("claims."+name+".mine", mine);
+        content.set("claims."+name+".cuboid", cuboid.toString());
 
         DataFile.claims.add(new ClaimObject(name, cuboid, pvp, mine));
 

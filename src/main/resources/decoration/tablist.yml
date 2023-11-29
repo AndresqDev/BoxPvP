@@ -1,11 +1,11 @@
-#Placeholders: %rank% %player% %player_kills% %player_live% %date% %online_players%
+#Placeholders: %rank% %player% %player_kills% %player_deaths% %player_live% %date% %online_players%
 #Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
 
 tablist:
   options:
     # | - Strings
-    tab_type: 'CLASSIC' #Types: 'CLASSIC' or 'MODERN'
-    tab_classic_format: '%player%     &e%player_ping%'
+    tab_type: 'MODERN' #Types: 'CLASSIC' or 'MODERN'
+    tab_classic_format: '%rank%%player%'
     # | - Ints
     tab_update_rate: 1000 #Update rate format: miliseconds
     # | - Lists
@@ -23,31 +23,41 @@ tablist:
     LEFT:
       ENTRY_TEST: #Entry name ignored
         slot: 1 #Slot, Min: 1
-        text: 'Test Line' #Text, Colors, Placeholders & gradients and hex allowed
+        text: '' #Text, Colors, Placeholders & gradients and hex allowed
         ping: -1 # -1 = Nulled ping
         head: '%none%' # '' or '%none%' = Default head
     MIDDLE:
-      ENTRY_TEST:
-        slot: 1
-        text: 'Test Line'
-        ping: -1
+      SERVER_NAME:
+        slot: 2
+        text: '<hex:FF55FF>&lServer Name'
+        ping: 1
+        head: '%SERVER_HEAD%'
+      PLAYER_KILLS:
+        slot: 4
+        text: '&7Kills: &a%player_kills%'
+        ping: 1
+        head: '%none%'
+      PLAYER_DEATHS:
+        slot: 5
+        text: '&7Deaths: &a%player_deaths%'
+        ping: 1
         head: '%none%'
     RIGHT:
       ENTRY_TEST:
         slot: 1
-        text: 'Test Line'
+        text: ''
         ping: -1
         head: '%none%'
     FAR_RIGHT:
       ENTRY_TEST:
-        slot: 5
-        text: '<gradient:2C08BA>Modified test line!<!gradient:028A97>'
-        ping: 10
-        head: '%CUSTOM_HEAD%'
+        slot: 1
+        text: ''
+        ping: -1
+        head: '%none%'
 
   # - CLASSIC Type = CustomHeads disabled
   custom_heads:
     My_New_Head: #Personal name of the head, Not relevant
-      placeholder: '%CUSTOM_HEAD%' #Exact Identifier
-      value: 'ewogICJ0aW1lc3RhbXAiIDogMTY3NjE3NDk1OTA3MCwKICAicHJvZmlsZUlkIiA6ICI4YmM3MjdlYThjZjA0YWUzYTI4MDVhY2YzNjRjMmQyNCIsCiAgInByb2ZpbGVOYW1lIiA6ICJub3RpbnZlbnRpdmUiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzJhODM4NWQ1Zjk2MWRhMmIxMWI0YWQwNDQyZTE3ODE2MWI2OGI1YTA0NTQxMDAwZDNlZGE1OTVmZGVlMGNlZCIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9'
-      signature: 'sbYUCDUuP/eY/0b3P0vgvqI94/BzB+XJ9pX4mbDARrUjNXFuo7AK6ooHG+0K4nQ9hL/qUmMvIl6HpSOdzWZq+Gnc+wO9VIXI+ak7fbcz3IOujFly3gm54g99vKZZt02p3RcDKUAmQxMbfpPiF+tTVVIlHApL0ZZa/7DhE9P0xeFBLL/gynZZQ9hf0U/mWaUeIinw5wmklFwjMnv3SgagLSdxI31+AvBaa1NkCyXwtdGnaxNRqNtzRXTRih6ztCOguaRbo+MY98pOvPdTdN3IX7YTVc1uIUoZHJ4uVzgPH7cwTJGohkPJAYf3TaYqUVS6wwEdqdSuAULZRitb7dsS6rrFnYiblnZ62m/WGlY8DvBQ+BSXodh+4cybXuLJjZXTYbd8bByjNYmXeNNSKSOejBcc5ZVWSyZ2vixKV6YP5KWI4ilzk/GwlCWvWf2MF0QovTGNUmVld2kbaLkr72gIJiyaP5wA//AWHV/uJH+/MQb34m8W+78owbQKconD5dzW9p2v4PMRsgbT2qRC7jtIeus8rapDT0joApn0bbaT6jKglP6KRCl8/+QDewFiVqFGo8mUDVjUCsW7UXUWB9nC6R9kIy9HdVSDcYvDwlP5sVXRp5anmXwMkva8NUz2rgSn7TnincVAUbz5dFAd4tuFWgVCzQu7aUz5aklilLFtsH8='
+      placeholder: '%SERVER_HEAD%' #Exact Identifier
+      value: 'ewogICJ0aW1lc3RhbXAiIDogMTYxMjAwNzgzNjI0MSwKICAicHJvZmlsZUlkIiA6ICIxYWZhZjc2NWI1ZGY0NjA3YmY3ZjY1ZGYzYWIwODhhOCIsCiAgInByb2ZpbGVOYW1lIiA6ICJMb3lfQmxvb2RBbmdlbCIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS80YTFlYjQzYmU5OTc2ZDRlZjBiZDI4NzFiNzAxNGZlNzllY2RhZWMzZDJkMzMzNjE5ZGE4ZDBhNmM5MGE2ODJjIiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0='
+      signature: 'e0xfq5M96ce61hrcCjKXebaPBEX6OUWC6EdMd/hwuFUFTz070LG2RMAH+eiP0R+TqiHyAPwLVlYky531J8BbSMoV9lhhFFUvsQ6tab9cPxhhVOP5jxSkM52OGch6X2jxBXyZxkBZR4LQXHaih5HqcdvgWPKlqI/d4wmOX9VaGUP3lnbOOiViQ1k4DZNDeVcgXmlaUqh0oVM+Sue6TmtY0lvjp0zrslle13B41DPnDXuW1hDTtfACD9sluwADZYi/youWBQSzD255e5CXaQFLC4sJTYO+KCj/Cufg0lQsh0Eudt8PiD7zNjv0qSafUoyobwrP2Koi6sammDKfP5Nf7k9a6ZDycrruXOSqGKUqdzmlU+iQvhZTbLEPfybWs9Vt3S1rMkKZvn3KaaoDoULPFrYfxMLtSS+R2IxkdG9gaQ7yAbrp2l8wBkKMa5AtkYUaKFzn54XZCAjU1OSIV5GZYkQjEKorOPrd9H3fKyY+ew/+Kvn2bELfcFIKhHK2RpNG5rZytf9mTULyy+J8GQuA4cHu7dwI9h6S3fUcExF4pVfgJkf2sb95a9H1oP8T9EMiJbIv6QOaUBibtsVfsOwGvpXO51bBT+KlkpMfksYKB/894iuWlrO/em1+05lwZr19+Ss/TXjM+XR5jmMWfawrnjGeQWlii4a3W2wlOwv2m7c='

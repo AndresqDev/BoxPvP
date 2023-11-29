@@ -4,7 +4,7 @@
 #                                                #
 ##################################################
 
-#Placeholders: %rank% %player% %player_kills% %player_live% %date% %online_players% %server_prefix_admin%
+#Placeholders: %rank% %player% %player_kills% %player_deaths% %player_live% %date% %online_players% %server_prefix_admin%
 #Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
 
 messages:
@@ -22,5 +22,5 @@ messages:
 
   join_message:
     - '&7&m----------------------'
-    - '   <hex:2C08BA>Welcome to the server!'
+    - '  &aThanks for playing!'
     - '&7&m----------------------'

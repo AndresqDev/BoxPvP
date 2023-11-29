@@ -4,7 +4,7 @@
 #                                                #
 ##################################################
 
-#Placeholders: %rank% %player% %player_kills% %player_live% %date% %online_players%
+#Placeholders: %rank% %pvp_timer% %player% %player_kills% %player_deaths% %player_live% %date% %online_players%
 #Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
 
 options:
@@ -12,17 +12,17 @@ options:
   actionbar:
     join:
       enabled: true
-      text: '<hex:2C08BA> < <gradient:2C08BA>Welcome,<!gradient:2C08BA><hex:2C08BA> %player% >'
+      text: '<hex:2C08BA> %player% | Kills: %player_kills% | Deaths: %player_deaths%'
     pvp:
       enabled: true
-      text: '<hex:2C08BA> < <gradient:2C08BA>In PvP: %pvp_timer%<!gradient:2C08BA><hex:2C08BA> >'
+      text: ' &4PvP Tag&7:&f %pvp_timer%'
 
   combatlog:
     entity:
       name: ""
 
   lag:
-    clearlag_delay: 18000 # - Time in ticks
+    clearlag_delay: 18000 # - Time in ticks - Silent
 
   chat:
     chat_format: '%rank% &a%player%&7: &f'
@@ -30,17 +30,17 @@ options:
     automatic_messages:
       discord_alert:
         message:
-          - "&aPlease join to discord!"
-          - "&7- &bdiscord.gg/server"
-        time: 300 # - Time in ticks
+          - "&aThanks for stay here!"
+          - "&aSocial Media: /discord, /twitter, /"
+        time: 3200 # - Time in ticks
 
-    global_join_message: # - Sended to all players online
+    global_join_message: # - Custom Join Global Messages
       my_rank_one:
         permission: 'rank.one.join'
         message: '%rank% &b%player% &ehas been joined!'
       my_rank_two:
         permission: 'rank.two.join'
-        message: '%rank% &b%player% &ehas been joined to battle royale!'
+        message: '%rank% &b%player% &ahas been joined!'
 
     blocked_word_msg: '&cSorry!, Please check your message.'
     blocked_words:
@@ -52,6 +52,7 @@ options:
       - '/plugins'
       - '/server'
 
+  # NO CHANGE WORLD SETTINGS WITHOUT EXPERIENCE
   world: # - Creative mode = Bypasses all block checks
     block_break: false
     block_place: false

@@ -1,10 +1,10 @@
-#Placeholders: %rank% %player% %player_kills% %player_live%, %date% %online_players%
+#Placeholders: %rank% %player% %player_kills% %player_deaths% %player_live%, %date% %online_players%
 #Custom colors: <hex:CODE> || <gradient:START_CODE>Example Text<!gradient:END_CODE>
 
 scoreboard:
   options:
     # | - Strings
-    bars: '<hex:00FFFF>&m-----------------'
+    bars: '&7&m-----------------'
     title: '<hex:FF55FF>&lSERVER'
     footer: ' <gradient:FF55FF>IP: play.server.net<!gradient:00FFFF> '
     # | - Booleans
@@ -45,6 +45,7 @@ scoreboard:
     - ' <hex:00FFFF>▎ <hex:FF55FF>Nick: &f%player%'
     - ' <hex:00FFFF>▎ <hex:FF55FF>Rank: &4%rank%'
     - ''
-    - ' <hex:00FFFF>▎ <hex:FF55FF>Coins: &f'
+    - ' <hex:00FFFF>▎ <hex:FF55FF>Kills: &f%player_kills%'
+    - ' <hex:00FFFF>▎ <hex:FF55FF>Deaths: &f%player_deaths%'
     - ''
     - ' <hex:00FFFF>▎ <hex:FF55FF>Online: &f%online_players%/2000'

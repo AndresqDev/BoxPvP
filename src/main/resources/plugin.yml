@@ -9,15 +9,11 @@ depends:
 
 commands:
   claim:
-    aliases: [ claimcreate ]
-  claimremove:
-    aliases: [ claimrem ]
+    aliases: [ claims ]
   mine:
-    aliases: [ minecreate ]
+    aliases: [ mines ]
   message:
     aliases: [ msg, reply, r ]
-  gamemode:
-    aliases: [ gm ]
   discord:
     aliases: [ dc ]
   store:
