@@ -105,7 +105,6 @@ public class Main extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("twitter")).setExecutor(new TwitterCommand());
         // - Player Admin Commands
         Objects.requireNonNull(this.getCommand("claim")).setExecutor(new ClaimCommand());
-        Objects.requireNonNull(this.getCommand("claimremove")).setExecutor(new RemoveClaimCommand());
         Objects.requireNonNull(this.getCommand("mine")).setExecutor(new MineCommand());
         Objects.requireNonNull(this.getCommand("gamemode")).setExecutor(new GamemodeCommand());
     }
