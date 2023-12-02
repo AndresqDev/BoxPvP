@@ -19,6 +19,7 @@ options:
 
   combatlog:
     enabled: true
+    skeleton_entity: false # Only for 1.16
     entity:
       name: ""
 

@@ -41,6 +41,8 @@ public class OptionsFile {
     // - CombatLog
     public static String combatlog_name;
     public static Boolean combatlog_enabled;
+    public static Boolean combatlog_skeleton_entity;
+
 
     // - Other Options
     public static String others_chatformat_placeholder;
@@ -82,6 +84,8 @@ public class OptionsFile {
         //CombatLog
         combatlog_name = ColorUtil.translate(content.getString("options.combatlog.entity.name"));
         combatlog_enabled = content.getBoolean("options.combatlog.entity.enabled");
+        combatlog_skeleton_entity = content.getBoolean("options.combatlog.entity.skeleton_entity");
+
 
         //Other
         others_chatformat_placeholder = ColorUtil.translate(content.getString("options.chat.chat_format"));

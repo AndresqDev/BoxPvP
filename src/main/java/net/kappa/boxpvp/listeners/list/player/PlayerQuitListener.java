@@ -1,5 +1,6 @@
 package net.kappa.boxpvp.listeners.list.player;
 
+import net.kappa.boxpvp.files.list.OptionsFile;
 import net.kappa.boxpvp.managers.list.ClaimManager;
 import net.kappa.boxpvp.managers.list.DataManager;
 import net.kappa.boxpvp.managers.list.TimerManager;
@@ -20,7 +21,7 @@ public class PlayerQuitListener implements Listener {
 
         if (!TimerManager.isActive(player, "pvp")) {
             if (claim == null || claim.isPvP()) {
-                if (pseudoProtocol == 16) new LoggerObject(player);
+                if (OptionsFile.combatlog_skeleton_entity) new LoggerObject(player);
                 else {
                     player.setHealth(0.0D);
                     return;
