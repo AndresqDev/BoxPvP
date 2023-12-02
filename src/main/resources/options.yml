@@ -18,6 +18,7 @@ options:
       text: ' &4PvP Tag&7:&f %pvp_timer%'
 
   combatlog:
+    enabled: true
     entity:
       name: ""
 
