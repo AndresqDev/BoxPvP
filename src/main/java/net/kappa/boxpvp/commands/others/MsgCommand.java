@@ -1,6 +1,5 @@
 package net.kappa.boxpvp.commands.others;
 
-import net.kappa.boxpvp.files.list.OptionsFile;
 import net.kappa.boxpvp.files.list.messages.MessagesFile;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

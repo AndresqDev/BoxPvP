@@ -83,8 +83,8 @@ public class OptionsFile {
 
         //CombatLog
         combatlog_name = ColorUtil.translate(content.getString("options.combatlog.entity.name"));
-        combatlog_enabled = content.getBoolean("options.combatlog.entity.enabled");
-        combatlog_skeleton_entity = content.getBoolean("options.combatlog.entity.skeleton_entity");
+        combatlog_enabled = content.getBoolean("options.combatlog.enabled");
+        combatlog_skeleton_entity = content.getBoolean("options.combatlog.skeleton_entity");
 
 
         //Other

@@ -21,7 +21,7 @@ options:
     enabled: true
     skeleton_entity: false # Only for 1.16
     entity:
-      name: ""
+      name: "&e%player%"
 
   lag:
     clearlag_delay: 18000 # - Time in ticks - Silent
@@ -54,8 +54,9 @@ options:
       - '/plugins'
       - '/server'
 
+  # Mines & Claims bypasses this
   # NO CHANGE WORLD SETTINGS WITHOUT EXPERIENCE
-  world: # - Creative mode = Bypasses all block checks
+  world: # - Creative mode bypasses all block checks
     block_break: false
     block_place: false
     weather_changes: false

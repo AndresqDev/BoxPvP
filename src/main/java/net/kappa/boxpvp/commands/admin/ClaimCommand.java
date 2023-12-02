@@ -4,6 +4,7 @@ import net.kappa.boxpvp.files.list.messages.AdminFile;
 import net.kappa.boxpvp.managers.list.ClaimManager;
 import net.kappa.boxpvp.managers.list.DataManager;
 import net.kappa.boxpvp.utils.CuboidUtil;
+import net.kappa.boxpvp.utils.PlaceholderUtil;
 import net.kappa.boxpvp.utils.objects.LocationObject;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,10 +20,10 @@ public class ClaimCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "No console.");
             return false;
         } else if (!sender.hasPermission("core.claim")) {
-            sender.sendMessage(AdminFile.admin_general_noPermission);
+            sender.sendMessage(PlaceholderUtil.setPlaceholders((Player) sender, AdminFile.admin_general_noPermission));
             return false;
         } else if (args.length < 3) {
-            sender.sendMessage(AdminFile.admin_general_insufficientArgs);
+            sender.sendMessage(PlaceholderUtil.setPlaceholders((Player) sender, AdminFile.admin_general_insufficientArgs));
             return false;
         }
 
@@ -33,20 +34,20 @@ public class ClaimCommand implements CommandExecutor {
  
         if(ClaimManager.containsWand(player)) {
             ClaimManager.putWand(player, new LocationObject());
-            player.sendMessage(AdminFile.admin_command_claim_unplacedPositions);
-            player.sendMessage(AdminFile.admin_command_claim_cancel);
+            player.sendMessage(PlaceholderUtil.setPlaceholders(player, AdminFile.admin_command_claim_unplacedPositions));
+            player.sendMessage(PlaceholderUtil.setPlaceholders(player, AdminFile.admin_command_claim_cancel));
             return true;
         } else {
             if(ClaimManager.getWand(player).getStart() == null || ClaimManager.getWand(player).getLast() == null) {
                 ClaimManager.removeWand(player);
-                player.sendMessage(AdminFile.admin_command_claim_unplacedPositions);
+                player.sendMessage(PlaceholderUtil.setPlaceholders(player, AdminFile.admin_command_claim_unplacedPositions));
                 return true;
             }
         }
 
         DataManager.addClaim(name, new CuboidUtil(ClaimManager.getWand(player).getStart(), ClaimManager.getWand(player).getLast()), pvp, mine);
         ClaimManager.removeWand(player);
-        player.sendMessage(AdminFile.admin_command_claim_create);
+        player.sendMessage(PlaceholderUtil.setPlaceholders(player, AdminFile.admin_command_claim_create));
 
         return true;
     }

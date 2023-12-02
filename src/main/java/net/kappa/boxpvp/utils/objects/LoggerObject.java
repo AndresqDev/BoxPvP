@@ -1,6 +1,7 @@
 package net.kappa.boxpvp.utils.objects;
 
 import net.kappa.boxpvp.files.list.OptionsFile;
+import net.kappa.boxpvp.utils.PlaceholderUtil;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -35,7 +36,7 @@ public class LoggerObject extends EntitySkeleton {
             this.setSlot(EnumItemSlot.values()[i + 1], CraftItemStack.asNMSCopy(this.armor[i]));
         }
 
-        this.setCustomName(CraftChatMessage.fromString(OptionsFile.combatlog_name)[0]);
+        this.setCustomName(CraftChatMessage.fromString(PlaceholderUtil.setPlaceholders(this.player, OptionsFile.combatlog_name))[0]);
         this.setCustomNameVisible(OptionsFile.combatlog_name != null);
 
         Location loc = player.getLocation();

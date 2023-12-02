@@ -2,6 +2,7 @@ package net.kappa.boxpvp.commands.social;
 
 import net.kappa.boxpvp.files.list.OptionsFile;
 import net.kappa.boxpvp.files.list.messages.MessagesFile;
+import net.kappa.boxpvp.utils.PlaceholderUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,7 +18,7 @@ public class StoreCommand implements CommandExecutor {
             return false;
         }
 
-        sender.sendMessage(MessagesFile.social_store);
+        sender.sendMessage(PlaceholderUtil.setPlaceholders((Player) sender, MessagesFile.social_store));
         return true;
     }
 }

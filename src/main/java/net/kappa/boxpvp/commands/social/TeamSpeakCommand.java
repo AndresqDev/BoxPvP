@@ -2,6 +2,7 @@ package net.kappa.boxpvp.commands.social;
 
 import net.kappa.boxpvp.files.list.OptionsFile;
 import net.kappa.boxpvp.files.list.messages.MessagesFile;
+import net.kappa.boxpvp.utils.PlaceholderUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,7 +18,7 @@ public class TeamSpeakCommand implements CommandExecutor {
             return false;
         }
 
-        sender.sendMessage(MessagesFile.social_ts);
+        sender.sendMessage(PlaceholderUtil.setPlaceholders((Player) sender, MessagesFile.social_ts));
         return true;
     }
 }

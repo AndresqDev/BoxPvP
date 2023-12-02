@@ -5,6 +5,7 @@ import net.kappa.boxpvp.files.list.system.DataFile;
 import net.kappa.boxpvp.managers.list.DataManager;
 import net.kappa.boxpvp.managers.list.MineManager;
 import net.kappa.boxpvp.utils.CuboidUtil;
+import net.kappa.boxpvp.utils.PlaceholderUtil;
 import net.kappa.boxpvp.utils.objects.ClaimObject;
 import net.kappa.boxpvp.utils.objects.LocationObject;
 import org.bukkit.ChatColor;
@@ -24,20 +25,23 @@ public class MineCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "No console.");
             return false;
-        } else if (!sender.hasPermission("core.mine")) {
+        }
+
+        final Player player = (Player) sender;
+
+        if (!sender.hasPermission("core.mine")) {
             sender.sendMessage(ChatColor.RED + "No permission.");
             return false;
         } else if (args.length < 1) {
-            for (String str : AdminFile.helpcmd_mine) sender.sendMessage(str);
+            for (String str : AdminFile.helpcmd_mine) sender.sendMessage(PlaceholderUtil.setPlaceholders(player, str));
             return false;
         }
 
         if (args[0].equals("create")) {
             if (args.length < 3) {
-                for (String str : AdminFile.helpcmd_mine) sender.sendMessage(str);
+                for (String str : AdminFile.helpcmd_mine) sender.sendMessage(PlaceholderUtil.setPlaceholders(player, str));
                 return false;
             }
-            final Player player = (Player) sender;
             final String name = args[1];
             final Material material = Material.getMaterial(args[2]);
             int time;
@@ -78,10 +82,9 @@ public class MineCommand implements CommandExecutor {
             return true;
         } else if (args[0].equals("remove")) {
             if (args.length < 2) {
-                for (String str : AdminFile.helpcmd_mine) sender.sendMessage(str);
+                for (String str : AdminFile.helpcmd_mine) sender.sendMessage(PlaceholderUtil.setPlaceholders(player, str));
                 return false;
             }
-            final Player player = (Player) sender;
             final String name = args[1];
 
             for(ClaimObject claim : DataFile.claims) {
@@ -96,10 +99,8 @@ public class MineCommand implements CommandExecutor {
 
             return false;
         } else {
-            for (String str : AdminFile.helpcmd_mine) sender.sendMessage(str);
+            for (String str : AdminFile.helpcmd_mine) sender.sendMessage(PlaceholderUtil.setPlaceholders(player, str));
             return false;
         }
-
-
     }
 }
